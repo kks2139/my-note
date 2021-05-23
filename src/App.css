@@ -1,0 +1,43 @@
+:root {
+  --theme-dark-1: rgb(66, 66, 66);
+  --theme-color: rgb(30, 71, 255);
+  --inactive-color : rgb(175, 175, 175);
+  --warn : rgba(255, 70, 64, 0.76);
+  --theme-shadow : 0px 0px 8px 0px var(--inactive-color);
+}
+
+input {
+	-webkit-appearance: none !important;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+
+.input-search {
+  caret-color: var(--theme-color);
+  border: 1px solid var(--inactive-color);
+  padding: 7px 7px 7px 15px;
+  color: var(--inactive-color);
+  box-sizing: border-box;
+}
+.input-search:hover {
+  border: 1px solid var(--theme-color2);
+  box-shadow: 0px 0px 8px -2px var(--theme-color2);
+}
+.input-search:focus {
+  border: 1px solid var(--theme-color2);
+  box-shadow: 0px 0px 8px -2px var(--theme-color2);
+}
+.input-search::placeholder {
+  color: var(--inactive-color);
+  padding: 2px;
+}
+
+.app {
+  height: 100vh;
+}
+
+.dark {
+  background-color: var(--theme-dark-1);
+  color: white;
+}
