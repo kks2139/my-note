@@ -1,34 +1,41 @@
 import React, { useState } from 'react';
 
-interface inputProps {
-    placeholder: string,
-    text?: string,
-    width?: string,
-    height?: string,
-    onEnter?: (e:React.KeyboardEvent<HTMLInputElement>)=>void
+interface styleAttr {
+    width?: string;
+    height?: string;
+    margin?: string;
+    padding?: string;
+    position?: 'absolute' | 'relative' | undefined;
+    top?: string;
+    left?: string;
+    transform?: string;
 }
 
-function Input({placeholder, text='', onEnter, width, height='30px'}: inputProps){
-    const [value, setValue] = useState('');
+interface inputProps {
+    placeholder?: string;
+    text?: string;
+    name?: string;
+    maxLength?: number;
+    style?: styleAttr;
+    onEnter?: (e: React.KeyboardEvent<HTMLInputElement>)=> void;
+}
 
-    const onKeyDown = (e:React.KeyboardEvent<HTMLInputElement>)=>{
+function Input({placeholder, text='', name='', maxLength, onEnter, style={width : 'fit-content'}}: inputProps){
+    const [value, setValue] = useState(text);
+
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>)=>{
         if(e.key === 'enter' && onEnter){
             onEnter(e);
         }
     }
 
-    const onChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-        setValue(p => e.currentTarget.value);
-    }
-
-    const style = {
-        width,
-        height
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setValue(e.currentTarget.value);
     }
 
     return (
-        <div style={style}>
-            <input placeholder={placeholder} value={text} onChange={onChange} onKeyDown={onKeyDown}></input>
+        <div>
+            <input className='input-1' placeholder={placeholder} name={name} maxLength={maxLength} onChange={onChange} onKeyDown={onKeyDown} style={style}></input>
         </div>
     )
 }
