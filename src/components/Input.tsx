@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
-
-interface styleAttr {
-    width?: string;
-    height?: string;
-    margin?: string;
-    padding?: string;
-    position?: 'absolute' | 'relative' | undefined;
-    top?: string;
-    left?: string;
-    transform?: string;
-}
+import {styleAttr} from '../util/interfaces';
 
 interface inputProps {
     placeholder?: string;
     text?: string;
     name?: string;
+    id?: string;
     maxLength?: number;
     style?: styleAttr;
+    hidden?: boolean;
     onEnter?: (e: React.KeyboardEvent<HTMLInputElement>)=> void;
 }
 
-function Input({placeholder, text='', name='', maxLength, onEnter, style={width : 'fit-content'}}: inputProps){
+function Input({placeholder, text='', id='', name='', maxLength, onEnter, hidden=false, style}: inputProps){
     const [value, setValue] = useState(text);
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>)=>{
@@ -35,7 +27,7 @@ function Input({placeholder, text='', name='', maxLength, onEnter, style={width 
 
     return (
         <div>
-            <input className='input-1' placeholder={placeholder} name={name} maxLength={maxLength} onChange={onChange} onKeyDown={onKeyDown} style={style}></input>
+            <input className='input-1' id={id} placeholder={placeholder} name={name} maxLength={maxLength} onChange={onChange} onKeyDown={onKeyDown} hidden={hidden} style={style}></input>
         </div>
     )
 }

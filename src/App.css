@@ -1,16 +1,25 @@
 :root {
   --theme-dark-1: rgb(66, 66, 66);
   --theme-dark-2: rgb(121, 121, 121);
-  --theme-color: rgb(30, 71, 255);
-  --theme-color-active: rgb(0, 33, 180);
-  --theme-color-hover: rgb(67, 102, 255);
+  --theme-color: rgb(64, 99, 255);
+  --theme-color-hover: rgb(40, 79, 255);
+  --theme-color-active: rgb(0, 43, 236);
+  --theme-color-2: rgba(111, 138, 255, 0.897);
   --theme-warn : rgba(255, 70, 64, 0.76);
   --inactive-color : rgb(175, 175, 175);
-  --theme-shadow : 0px 0px 8px 0px var(--inactive-color);
-  --radius: 2px;
+  --theme-shadow : 0px 0px 7px -2px black;
+  --radius: 5px;
 }
 
-*,*:focus,*:hover{outline:none;}
+div, span {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none; 
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  user-select:none;
+}
+
+*, *:focus, *:hover{outline:none;}
 
 input {
 	-webkit-appearance: none !important;
@@ -18,7 +27,6 @@ input {
 	appearance: none;
 	margin: 0;
 }
-
 
 .app {
   height: 100vh;
@@ -31,22 +39,20 @@ input {
 
 .input-1 {
   caret-color: var(--theme-color);
-  border: 1px solid #bdbdbd;
+  border: 1px solid var(--inactive-color);
   border-radius: var(--radius);
   padding: 7px 7px 7px 15px;
   width: 200px;
   height: 35px;
-  color: var(--inactive-color);
+  /* color: var(--inactive-color); */
   margin: 1px;
   box-sizing: border-box;
 }
 .input-1:hover {
-  border: 1px solid var(--theme-color);
-  box-shadow: 0px 0px 8px -2px var(--theme-color);
+  border: 3px solid var(--theme-color-2);
 }
 .input-1:focus {
-  border: 1px solid var(--theme-color);
-  box-shadow: 0px 0px 8px -2px var(--theme-color);
+  border: 3px solid var(--theme-color-2);
 }
 .input-1::placeholder {
   color: var(--inactive-color);
@@ -58,7 +64,7 @@ input {
   background-color: var(--theme-color);
   border-radius: var(--radius);
   text-align: center;
-  font-weight: 500;
+  font-weight: bold;
   height: 28px;
   width: fit-content;
   line-height: 28px;
@@ -67,19 +73,35 @@ input {
 .btn-1:hover {
   cursor: pointer;
   background-color: var(--theme-color-hover);
+  box-shadow: var(--theme-shadow);
 }
 .btn-1:active {
   background-color: var(--theme-color-active);
 }
 
+.login-back {
+  width: 100vw;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: wheat;
+}
 .login-box {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--theme-dark-2);
+  color: black;
+  background-color: white;
   border-radius: var(--radius);
   text-align: center;
   width: 400px;
-  height: 500px;
+  height: 350px;
+  box-shadow: 0 0 20px -5px black;
+}
+.login-box .login-tit {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 25px;
 }

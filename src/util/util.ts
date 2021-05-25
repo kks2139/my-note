@@ -1,5 +1,5 @@
 interface requestParam {
-    method: string;
+    method?: string;
     url: string;
     body?: object;
 }
@@ -18,7 +18,7 @@ interface resultAttr {
 }
 
 const UT = {
-    request : ({method='GET', url, body={}}: requestParam, callback?: (obj: resultAttr)=> void)=>{
+    request : ({method='POST', url='', body={}}: requestParam, callback?: (obj: resultAttr)=> void): void=>{
         const option: optionAttr = {
             method: method,
             credentials: "same-origin",
@@ -46,6 +46,10 @@ const UT = {
         .catch(e =>{
             alert(e);
         })
+    },
+
+    toastMsg : (msg: string): void=>{
+        
     }
 }
 
