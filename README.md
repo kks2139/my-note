@@ -1,6 +1,5 @@
-# my-note (Making my own notes) 
-
-### 자유롭게 필기, 메모하고 저장할 수 있는 SPA 구현
+# my-note - Making my own notes 
+자유롭게 필기, 메모하고 저장할 수 있는 SPA 구현
 
 ***
 
