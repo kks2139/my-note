@@ -1,23 +1,32 @@
 import { stat } from 'fs';
 import React, { useReducer, useRef, useState } from 'react';
 import {Button, Input} from '../components/CompLink';
-import {styleAttr} from '../util/interfaces';
+import {styleAttr, requestParam} from '../util/interfaces';
 import UT from '../util/util';
 
 interface stateObj {
     isJoin: boolean;
     loginTxt: string;
+    text1: string;
+    text2: string;
+    text3: string;
 }
+
+type inputEl = HTMLInputElement | null;
 
 function Login(){
     const [info, setInfo] = useState<stateObj>({
         isJoin : false,
-        loginTxt : '로그인'
+        loginTxt : '로그인',
+        text1 : '',
+        text2 : '',
+        text3 : ''
     });
     const boxRef = useRef<HTMLDivElement>(null);
     
     const onEnter = (e: React.KeyboardEvent<HTMLInputElement>): void=>{
-        
+
+
     }
     
     const onClick = (e: React.MouseEvent<HTMLDivElement>): void=>{
@@ -27,7 +36,10 @@ function Login(){
         }else if(name === 'join' || name === 'back'){
             setInfo({
                 isJoin : !info.isJoin,
-                loginTxt : info.isJoin ? '로그인' : '회원가입'
+                loginTxt : info.isJoin ? '로그인' : '회원가입',
+                text1 : 'ff',
+                text2 : 'gg',
+                text3 : ''
             });
         }else if(name === 'joinEnd'){
             onJoin();
@@ -37,27 +49,69 @@ function Login(){
 
     const onLogin = (): void=>{
         const node = boxRef.current;
-        if(node){
-            const el1:HTMLInputElement | null = node.querySelector('input[name=id]'); 
-            const el2:HTMLInputElement | null = node.querySelector('input[name=pw]'); 
-            if(el1 && el2){
-                validate(el1, el2);
-            }else{
-                console.warn('No such elements!');
+        const el1: inputEl = node!.querySelector('input[name=id]'); 
+        const el2: inputEl = node!.querySelector('input[name=pw]'); 
+
+        if(el1 && el2){
+            if(validate(el1, el2)){
+                const param: requestParam = {
+                    url : 'login',
+                    body : {
+                        id : el1.value,
+                        pw : el1.value
+                    }
+                }
+                UT.request(param, ()=>{
+                    // 로그인 구현
+                });
             }
         }
     }
 
     const onJoin = (): void=>{
-        
+        const node = boxRef.current;
+        const el1: inputEl = node!.querySelector('input[name=id]'); 
+        const el2: inputEl = node!.querySelector('input[name=pw]'); 
+        const el3: inputEl = node!.querySelector('input[name=pw2]'); 
+
+        if(el1 && el2 && el3){
+            if(validate(el1, el2, el3)){
+                const param: requestParam = {
+                    url : 'join',
+                    body : {
+                        id : el1.value,
+                        pw : el1.value
+                    }
+                }
+                UT.request(param, ()=>{
+                    // 로그인 구현
+                });
+            }
+        }
     }
 
-    const validate = (el_id: HTMLInputElement, el_pw: HTMLInputElement): void=>{
+    const validate = (el_id: HTMLInputElement, el_pw: HTMLInputElement, el_pw2?: HTMLInputElement): boolean=>{
+        let ret = true;
         if(!(el_id.value.trim())){
             el_id.focus();
+            UT.toastMsg('아이디를 입력해주세요.');
+            ret = false;
         }else if(!(el_pw.value.trim())){
             el_pw.focus();
+            UT.toastMsg('비밀번호를 입력해주세요.');
+            ret = false;
+        }else if(el_pw2){
+            if(!(el_pw2.value.trim())){
+                el_pw2.focus();
+                UT.toastMsg('비밀번호 확인을 입력해주세요.');
+                ret = false;
+            }else if(el_pw.value !== el_pw2.value){
+                el_pw2.focus();
+                UT.toastMsg('비밀번호가 서로 다릅니다.');
+                ret = false;
+            }
         }
+        return ret;
     }
 
     const btnStyle: styleAttr = {
@@ -79,9 +133,9 @@ function Login(){
         // <div className='login-back'>
             <div className='login-box' ref={boxRef}>
                 <div className='login-tit'>{info.loginTxt}</div>
-                <Input placeholder='아이디를 입력하세요.' onEnter={onEnter} name='id'></Input>
-                <Input placeholder='비밀번호를 입력하세요.' onEnter={onEnter} name='pw'></Input>
-                <Input placeholder='비밀번호(확인)' onEnter={onEnter} name='pw2' hidden={!info.isJoin}></Input>
+                <Input placeholder='아이디를 입력하세요.' text={info.text1} onEnter={onEnter} name='id'></Input>
+                <Input placeholder='비밀번호를 입력하세요.' text={info.text2} onEnter={onEnter} name='pw'></Input>
+                <Input placeholder='비밀번호(확인)' text={info.text3} onEnter={onEnter} name='pw2' hidden={!info.isJoin}></Input>
                 
                 {!info.isJoin ?
                     <div style={divStyle}>

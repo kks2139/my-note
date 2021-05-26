@@ -1,8 +1,4 @@
-interface requestParam {
-    method?: string;
-    url: string;
-    body?: object;
-}
+import {requestParam} from './interfaces';
 
 interface optionAttr {
     method?: string;
@@ -44,12 +40,28 @@ const UT = {
             }
         })
         .catch(e =>{
-            alert(e);
+            UT.toastMsg(e);
         })
     },
 
-    toastMsg : (msg: string): void=>{
-        
+    toastMsg : (msg: string=''): void=>{
+        let toast:HTMLDivElement | null = null; 
+        const el:HTMLDivElement | null = document.querySelector('div.toast');
+        if(el){
+            el.textContent = msg;
+        }else{
+            toast = document.createElement('div');
+            toast.textContent = msg;
+            toast.classList.add('toast');
+            document.body.appendChild(toast);
+        }
+
+        setTimeout(()=>{
+            if(toast){
+                toast.style.opacity = '0';
+                setTimeout(()=> document.body.removeChild(toast!), 300);
+            }
+        }, 1700);
     }
 }
 

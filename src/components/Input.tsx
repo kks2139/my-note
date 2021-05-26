@@ -12,7 +12,7 @@ interface inputProps {
     onEnter?: (e: React.KeyboardEvent<HTMLInputElement>)=> void;
 }
 
-function Input({placeholder, text='', id='', name='', maxLength, onEnter, hidden=false, style}: inputProps){
+function Input({placeholder, text, id, name, maxLength, onEnter, hidden=false, style}: inputProps){
     const [value, setValue] = useState(text);
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>)=>{
@@ -26,8 +26,8 @@ function Input({placeholder, text='', id='', name='', maxLength, onEnter, hidden
     }
 
     return (
-        <div>
-            <input className='input-1' id={id} placeholder={placeholder} name={name} maxLength={maxLength} onChange={onChange} onKeyDown={onKeyDown} hidden={hidden} style={style}></input>
+        <div id={id} hidden={hidden}>
+            <input className='input-1' placeholder={placeholder} value={value} name={name} maxLength={maxLength} onChange={onChange} onKeyDown={onKeyDown} style={style}></input>
         </div>
     )
 }

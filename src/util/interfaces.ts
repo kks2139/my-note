@@ -1,4 +1,4 @@
-/***  공통 type 선언  ***/
+/***  공통타입 선언  ***/
 
 // 컴포넌트 inline 스타일 
 export interface styleAttr {
@@ -25,4 +25,11 @@ export interface styleAttr {
     transition?: string;
     display?: string;
     opacity?: string;
+}
+
+// 요청 파라미터
+export interface requestParam {
+    method?: string;
+    url: string;
+    body?: object;
 }
