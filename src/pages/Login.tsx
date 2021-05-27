@@ -1,5 +1,4 @@
-import { stat } from 'fs';
-import React, { useReducer, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {Button, Input} from '../components/CompLink';
 import {styleAttr, requestParam} from '../util/interfaces';
 import UT from '../util/util';
@@ -7,9 +6,9 @@ import UT from '../util/util';
 interface stateObj {
     isJoin: boolean;
     loginTxt: string;
-    text1: string;
-    text2: string;
-    text3: string;
+    id: string;
+    pw: string;
+    pw2: string;
 }
 
 type inputEl = HTMLInputElement | null;
@@ -18,15 +17,20 @@ function Login(){
     const [info, setInfo] = useState<stateObj>({
         isJoin : false,
         loginTxt : '로그인',
-        text1 : '',
-        text2 : '',
-        text3 : ''
+        id : '',
+        pw : '',
+        pw2 : ''
     });
-    const boxRef = useRef<HTMLDivElement>(null);
+    const boxRef = useRef<HTMLDivElement | null>(null);
     
     const onEnter = (e: React.KeyboardEvent<HTMLInputElement>): void=>{
 
 
+    }
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        const {name, value} = e.target;
+        setInfo({...info, [name] : value});
     }
     
     const onClick = (e: React.MouseEvent<HTMLDivElement>): void=>{
@@ -37,9 +41,9 @@ function Login(){
             setInfo({
                 isJoin : !info.isJoin,
                 loginTxt : info.isJoin ? '로그인' : '회원가입',
-                text1 : 'ff',
-                text2 : 'gg',
-                text3 : ''
+                id : '',
+                pw : '',
+                pw2 : ''
             });
         }else if(name === 'joinEnd'){
             onJoin();
@@ -133,10 +137,9 @@ function Login(){
         // <div className='login-back'>
             <div className='login-box' ref={boxRef}>
                 <div className='login-tit'>{info.loginTxt}</div>
-                <Input placeholder='아이디를 입력하세요.' text={info.text1} onEnter={onEnter} name='id'></Input>
-                <Input placeholder='비밀번호를 입력하세요.' text={info.text2} onEnter={onEnter} name='pw'></Input>
-                <Input placeholder='비밀번호(확인)' text={info.text3} onEnter={onEnter} name='pw2' hidden={!info.isJoin}></Input>
-                
+                <Input placeholder='아이디를 입력하세요.' text={info.id} onEnter={onEnter} onChange={onChange} name='id'></Input>
+                <Input placeholder='비밀번호를 입력하세요.' text={info.pw} onEnter={onEnter} onChange={onChange} name='pw'></Input>
+                <Input placeholder='비밀번호(확인)' text={info.pw2} onEnter={onEnter} onChange={onChange} name='pw2' hidden={!info.isJoin}></Input>
                 {!info.isJoin ?
                     <div style={divStyle}>
                         <Button text='로그인' name='login' onClick={onClick} style={btnStyle}></Button>
