@@ -11,12 +11,11 @@ function SessionBar(){
     const [timer, setTimer] = useState('');
     let intervalId = useRef<NodeJS.Timeout | null>(null);
 
-
     useEffect(()=>{
         intervalId.current = setInterval(()=>{
             // yyyy.MM.dd HH:mm:ss 로 날짜 세팅
         }, 1000);
-        return clearInterval(intervalId.current);
+        return ()=> clearInterval(intervalId.current!);
     }, []);
 
     return (
