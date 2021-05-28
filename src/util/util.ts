@@ -62,6 +62,65 @@ const UT = {
                 setTimeout(()=> document.body.removeChild(toast!), 300);
             }
         }, 1700);
+    },
+
+    alert : (msg: string, callback?: ()=>void): void=>{
+        UT.makeDialog(true, msg, callback);
+    },
+    
+    confirm : (msg: string, callbackYes?: ()=>void, callbackNo?: ()=>void): void=>{
+        UT.makeDialog(false, msg, callbackYes, callbackNo);
+    },
+
+    makeDialog : (isAlert: boolean, msg: string, callbackYes?: ()=>void, callbackNo?: ()=>void): void=>{
+        const modalRoot = document.querySelector('#modal');
+        if(modalRoot!.querySelector('div.modal')) return undefined;
+
+        const back: HTMLDivElement = document.createElement('div');
+        const box: HTMLDivElement = document.createElement('div');
+        const title: HTMLDivElement = document.createElement('div');
+        const label: HTMLDivElement = document.createElement('div');
+        const btnBox: HTMLDivElement = document.createElement('div');
+        const btnWrap: HTMLDivElement = document.createElement('div');
+        const yesBtn: HTMLDivElement = document.createElement('div');
+        
+        back.classList.add('modal');
+        box.classList.add('dialog');
+        
+        title.classList.add('dialog-title');
+        title.textContent = '알림';
+        
+        label.classList.add('label');
+        label.textContent = msg;
+        
+        btnBox.classList.add('dialog-btn-box');
+        btnWrap.classList.add('dialog-btn-wrap');
+
+        yesBtn.classList.add('btn-1', 'dialog-btn');
+        yesBtn.textContent = '예';
+        yesBtn.onclick = (): void=>{
+            if(callbackYes) callbackYes();
+            modalRoot!.removeChild(modalRoot!.firstChild!);
+        };
+        
+        back.appendChild(box);
+        box.appendChild(title);
+        box.appendChild(label);
+        box.appendChild(btnBox);
+        btnBox.appendChild(btnWrap);
+        btnWrap.appendChild(yesBtn);
+        
+        if(!isAlert){
+            const noBtn: HTMLDivElement = document.createElement('div');
+            noBtn.classList.add('btn-1', 'dialog-btn');
+            noBtn.textContent = '아니요';
+            noBtn.onclick = (): void=>{
+                if(callbackNo) callbackNo();
+                modalRoot!.removeChild(modalRoot!.firstChild!);
+            }
+            btnWrap.appendChild(noBtn);
+        }
+        modalRoot!.appendChild(back);
     }
 }
 
