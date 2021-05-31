@@ -232,3 +232,20 @@ input {
   font-weight: bold;
   line-height: 32px;
 }
+
+.dropdown-box {
+  position: relative;
+}
+.drop-list {
+  position: absolute;
+
+  border: 1px solid var(--inactive-color);
+  border-radius: var(--radius);
+  background-color: white;
+}
+.drop-list > div {
+  color: black;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px 10px;
+}

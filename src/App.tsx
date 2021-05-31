@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import {Route} from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import Main from './pages/Main';
@@ -17,7 +17,7 @@ export const appContext = React.createContext<globalProps | null>(null);
 
 function App() {
   const [userInfo, setUserInfo] = useState<userInfo | null>({});
-  
+
   const onLogin = ()=>{
     
   }
@@ -25,6 +25,22 @@ function App() {
   const onLogout = ()=>{
 
   }
+
+  // 글로벌 이벤트 판별
+  useEffect(()=>{
+    document.body.onclick = (e: MouseEvent): void=>{
+      const dropList: Element | null = document.querySelector('div.drop-list');
+      const targ = e.currentTarget as HTMLElement;
+      const pTarg = targ.parentNode as HTMLElement;
+
+      if(dropList && !pTarg!.classList.contains('drop-list')){
+        dropList.parentNode!.removeChild(dropList);
+      }
+    }
+    return ()=> {
+      document.body.onclick = null;
+    };
+  }, []);
 
   return (
     <div className="app dark">

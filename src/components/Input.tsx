@@ -14,13 +14,13 @@ interface inputProps {
 }
 
 function Input({placeholder, text, id, name, maxLength, onEnter, onChange, hidden=false, style}: inputProps){
-    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>)=>{
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>):void=>{
         if(e.key === 'enter' && onEnter){
             onEnter(e);
         }
     }
 
-    const valueChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    const valueChange = (e: React.ChangeEvent<HTMLInputElement>):void=>{
         if(onChange){
             onChange(e);
         }

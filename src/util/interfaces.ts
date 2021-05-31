@@ -25,6 +25,11 @@ export interface styleAttr {
     transition?: string;
     display?: string;
     opacity?: string;
+    background?: string;
+    backgroundColor?: string;
+    backgroundImage?: string;
+    backgroundPosition?: string;
+    backgroundRepeat?: string;
 }
 
 // 요청 파라미터

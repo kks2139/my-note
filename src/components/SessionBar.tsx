@@ -1,14 +1,19 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
-import {Button, Pusher} from './CompLink';
-import {styleAttr} from '../util/interfaces';
+import {Button, Pusher, DropDownList} from './CompLink';
 import {appContext} from '../App';
 
 interface sessionBarProps {
 
 }
 
+interface infoItems {
+    data: string;
+    label: string;
+}
+
 function SessionBar({}: sessionBarProps){
     const dayStr: string[] = ['월요일','화요일','수요일','목요일','금요일','토요일', '일요일'];
+    const items: infoItems[] = [{data : '1', label : 'one'}, {data : '2', label : 'two'}, {data : '3', label : 'three'}];
     const [timer, setTimer] = useState('');
     const context = useContext(appContext);
     let intervalId = useRef<NodeJS.Timeout | null>(null);
@@ -64,6 +69,7 @@ function SessionBar({}: sessionBarProps){
                                 <div className='timer'>{timer}</div>
                                 <Button text='정보' onClick={onInfoClick}></Button>
                                 <Button text='로그아웃' onClick={onLogoutClick}></Button>
+                                <DropDownList type='button' text='Dropdown' items={items}></DropDownList>
                             </div>
                         </td>
                     </tr>
