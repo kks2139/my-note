@@ -8,12 +8,12 @@ interface userInfo {
 
 }
 
-interface globalProps {
+interface contextProps {
   onLogout : ()=> void;
   userInfo : userInfo | null;
 }
 
-export const appContext = React.createContext<globalProps | null>(null);
+export const appContext = React.createContext<contextProps | null>(null);
 
 function App() {
   const [userInfo, setUserInfo] = useState<userInfo | null>({});
@@ -29,12 +29,14 @@ function App() {
   // 글로벌 이벤트 판별
   useEffect(()=>{
     document.body.onclick = (e: MouseEvent): void=>{
-      const dropList: Element | null = document.querySelector('div.drop-list');
+      const dropDown: NodeListOf<Element> = document.querySelectorAll('div.drop-list');
       const targ = e.currentTarget as HTMLElement;
-      const pTarg = targ.parentNode as HTMLElement;
+      const targUp = targ.parentNode as HTMLElement;
 
-      if(dropList && !pTarg!.classList.contains('drop-list')){
-        dropList.parentNode!.removeChild(dropList);
+      if(dropDown.length > 0){
+        dropDown.forEach(el => {
+          if(!el.classList.contains('hide-node')) el.classList.add('hide-node');
+        });
       }
     }
     return ()=> {

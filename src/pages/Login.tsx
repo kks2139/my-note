@@ -107,7 +107,7 @@ function Login(){
         }else if(el_pw2){
             if(!(el_pw2.value.trim())){
                 el_pw2.focus();
-                UT.toastMsg('비밀번호 확인을 입력해주세요.');
+                UT.toastMsg('비밀번호(확인)을 입력해주세요.');
                 ret = false;
             }else if(el_pw.value !== el_pw2.value){
                 el_pw2.focus();
@@ -137,8 +137,8 @@ function Login(){
         // <div className='login-back'>
             <div className='login-box' ref={boxRef}>
                 <div className='login-tit'>{info.loginTxt}</div>
-                <Input placeholder='아이디를 입력하세요.' text={info.id} onEnter={onEnter} onChange={onChange} name='id'></Input>
-                <Input placeholder='비밀번호를 입력하세요.' text={info.pw} onEnter={onEnter} onChange={onChange} name='pw'></Input>
+                <Input placeholder='아이디' text={info.id} onEnter={onEnter} onChange={onChange} name='id'></Input>
+                <Input placeholder='비밀번호' text={info.pw} onEnter={onEnter} onChange={onChange} name='pw'></Input>
                 <Input placeholder='비밀번호(확인)' text={info.pw2} onEnter={onEnter} onChange={onChange} name='pw2' hidden={!info.isJoin}></Input>
                 {!info.isJoin ?
                     <div style={divStyle}>
