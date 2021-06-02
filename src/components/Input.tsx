@@ -15,7 +15,7 @@ interface inputProps {
 
 function Input({placeholder, text, id, name, maxLength, onEnter, onChange, hidden=false, style}: inputProps){
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>):void=>{
-        if(e.key === 'enter' && onEnter){
+        if(e.key === 'Enter' && onEnter){
             onEnter(e);
         }
     }

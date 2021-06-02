@@ -8,13 +8,12 @@ interface optionAttr {
 }
 
 interface resultAttr {
-    msg: string;
-    result: object;
-    data: object | string | undefined;
+    errMsg: string;
+    data: object | string | undefined | null;
 }
 
 const UT = {
-    request : ({method='POST', url='', body={}}: requestParam, callback?: (obj: resultAttr)=> void): void=>{
+    request : async ({method='POST', url='', body={}}: requestParam, callback?: (obj: resultAttr)=> void)=>{
         const option: optionAttr = {
             method: method,
             credentials: "same-origin",
@@ -24,24 +23,35 @@ const UT = {
             }
         }
         if(method.toLowerCase() === 'post') option.body = JSON.stringify(body);
-        fetch('/api/' + url, option)
-        .then(res => {
-            if(res.status === 200) return res.json();
-            else throw new Error('문제가 발생하였습니다.');
-        })
-        .then(res =>{
-            const result = {
-                msg : res.errorMsg,
-                result : res.rows,
-                data : res.data || res
+        // fetch('/api/' + url, option)
+        // .then(res => {
+        //     if(res.status === 200) return res.json();
+        //     else throw new Error('문제가 발생하였습니다.');
+        // })
+        // .then(res =>{
+        //     const result = {
+        //         msg : res.errorMsg,
+        //         result : res.rows,
+        //         data : res.data || res
+        //     }
+        //     if(callback){
+        //         callback(result);
+        //     }
+        // })
+        // .catch(e =>{
+        //     UT.toastMsg(e);
+        // })
+        try{
+            const res = await fetch('/api/' + url, option);
+            if(res.status === 200){
+                const result = await res.json();
+                if(callback) callback(result);
+            }else{
+                throw new Error('문제가 발생하였습니다.');
             }
-            if(callback){
-                callback(result);
-            }
-        })
-        .catch(e =>{
-            UT.toastMsg(e);
-        })
+        }catch(e){
+            UT.alert(e);
+        }
     },
 
     toastMsg : (msg: string=''): void=>{

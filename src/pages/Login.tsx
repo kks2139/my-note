@@ -24,8 +24,7 @@ function Login(){
     const boxRef = useRef<HTMLDivElement | null>(null);
     
     const onEnter = (e: React.KeyboardEvent<HTMLInputElement>): void=>{
-
-
+        onLogin();
     }
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -59,7 +58,7 @@ function Login(){
         if(el1 && el2){
             if(validate(el1, el2)){
                 const param: requestParam = {
-                    url : 'login',
+                    url : 'getUser',
                     body : {
                         id : el1.value,
                         pw : el1.value
@@ -87,8 +86,9 @@ function Login(){
                         pw : el1.value
                     }
                 }
-                UT.request(param, ()=>{
+                UT.request(param, (res)=>{
                     // 로그인 구현
+                    UT.toastMsg(res.errMsg);
                 });
             }
         }
