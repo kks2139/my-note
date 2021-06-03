@@ -10,9 +10,9 @@ const db = mysql.createPool({
 
 const sqlMap = {
     getUser : `
-        select name
+        select id
           from user_note
-         where name = ?
+         where id = ?
            and pw = ? 
     `,
 };
@@ -30,7 +30,7 @@ const doQuery = async (sqlId, p)=>{
     const conn = await db.getConnection(async c => c);
     try{
         await conn.beginTransaction();
-        const rows = await conn.query(sqlMap[sqlId], params);
+        const [rows, tmp] = await conn.query(sqlMap[sqlId], params);
         await conn.commit();
         conn.release();
         return {rows, error};

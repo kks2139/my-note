@@ -1,15 +1,10 @@
-import {requestParam} from './interfaces';
+import {requestParam, resultAttr} from './interfaces';
 
 interface optionAttr {
     method?: string;
     credentials?: RequestCredentials;
     headers: HeadersInit;
     body?: string;
-}
-
-interface resultAttr {
-    errMsg: string;
-    data: object | string | undefined | null;
 }
 
 const UT = {
@@ -23,33 +18,18 @@ const UT = {
             }
         }
         if(method.toLowerCase() === 'post') option.body = JSON.stringify(body);
-        // fetch('/api/' + url, option)
-        // .then(res => {
-        //     if(res.status === 200) return res.json();
-        //     else throw new Error('문제가 발생하였습니다.');
-        // })
-        // .then(res =>{
-        //     const result = {
-        //         msg : res.errorMsg,
-        //         result : res.rows,
-        //         data : res.data || res
-        //     }
-        //     if(callback){
-        //         callback(result);
-        //     }
-        // })
-        // .catch(e =>{
-        //     UT.toastMsg(e);
-        // })
         try{
+            UT.showLoading(true);
             const res = await fetch('/api/' + url, option);
             if(res.status === 200){
-                const result = await res.json();
+                UT.showLoading(false);
+                const result: resultAttr = await res.json();
                 if(callback) callback(result);
             }else{
                 throw new Error('문제가 발생하였습니다.');
             }
         }catch(e){
+            UT.showLoading(false);
             UT.alert(e);
         }
     },
@@ -131,6 +111,35 @@ const UT = {
             btnWrap.appendChild(noBtn);
         }
         modalRoot!.appendChild(back);
+    },
+
+    showLoading : (show: boolean): void=>{
+        const modalRoot = document.querySelector('#modal');
+        if(show && modalRoot!.querySelector('div.modal')) return undefined;
+
+        
+        if(show){
+            //const text: string[] = ['L','o','a','d','i','n','g','.','.','.'];
+            const text: string[] = ['처','리','중','.','.','.',];
+            const back: HTMLDivElement = document.createElement('div');
+            const box: HTMLDivElement = document.createElement('div');
+    
+            back.classList.add('modal');
+            box.classList.add('loadmask');
+            
+            for(let i=0; i<text.length; i++){
+                const mask: HTMLDivElement = document.createElement('div');
+                mask.classList.add(`mask-${i + 1}`);
+                mask.textContent = text[i];
+                box.appendChild(mask);
+            }
+            back.appendChild(box);
+            modalRoot!.appendChild(back);
+        }else{
+            if(modalRoot!.firstChild !== null){
+                modalRoot!.removeChild(modalRoot!.firstChild);
+            }
+        }
     }
 }
 

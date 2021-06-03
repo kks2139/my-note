@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {Button, Input} from '../components/CompLink';
-import {styleAttr, requestParam} from '../util/interfaces';
+import {styleAttr, requestParam, resultAttr} from '../util/interfaces';
 import UT from '../util/util';
 
 interface stateObj {
@@ -61,11 +61,15 @@ function Login(){
                     url : 'getUser',
                     body : {
                         id : el1.value,
-                        pw : el1.value
+                        pw : el2.value
                     }
                 }
-                UT.request(param, ()=>{
-                    // 로그인 구현
+                UT.request(param, (res: resultAttr)=>{
+                    if(res.data!.length === 0){
+                        UT.alert('아이디 혹은 비밀번호를 다시 확인하세요.');
+                    }else{
+
+                    }
                 });
             }
         }

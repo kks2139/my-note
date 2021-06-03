@@ -38,3 +38,9 @@ export interface requestParam {
     url: string;
     body?: object;
 }
+
+// 응답값
+export interface resultAttr {
+    errMsg: string;
+    data: object[] | string | undefined | null;
+}

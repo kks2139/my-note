@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {Button} from './CompLink';
 
 type rootEl = 'button' | 'combox';
@@ -32,11 +32,6 @@ function DropDownList({type, text='', items, onSelect}: dropDownListProps){
             label : e.currentTarget.textContent || ''
          });
     }
-
-    useEffect(()=>{
-        const pos: DOMRect = dropDownRef.current!.getBoundingClientRect();
-        dropListRef.current!.style.left = pos.x - pos.width - 5 + 'px'; 
-    }, []);
 
     return (
         <div className='dropdown-box' ref={dropDownRef}>

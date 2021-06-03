@@ -4,6 +4,7 @@ import SessionBar from './SessionBar';
 import Pusher from './Pusher';
 import DropDownList from './DropDownList';
 import Clock from './Clock';
+import VerticalNavi from './VerticalNavi';
 
 export {
     Input, 
@@ -11,5 +12,6 @@ export {
     SessionBar,
     Pusher,
     DropDownList,
-    Clock
+    Clock,
+    VerticalNavi
 };
