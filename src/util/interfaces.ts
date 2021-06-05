@@ -40,7 +40,7 @@ export interface requestParam {
 }
 
 // 응답값
-export interface resultAttr {
+export interface resultAttr<dataType> {
     errMsg: string;
-    data: object[] | string | undefined | null;
+    data : dataType[];
 }

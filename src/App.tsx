@@ -1,7 +1,8 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
-import {Route} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {Route, RouteComponentProps, Switch, withRouter} from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import Main from './pages/Main';
+import NotFound from './pages/NotFound';
 import './App.css';
 
 interface userInfo {
@@ -9,21 +10,24 @@ interface userInfo {
 }
 
 interface contextProps {
-  onLogout : ()=> void;
-  userInfo : userInfo | null;
+  onLoginSuccess: (id: string)=>void; 
+  onLogout: ()=> void;
+  userInfo: userInfo | null;
 }
 
 export const appContext = React.createContext<contextProps | null>(null);
 
-function App() {
+function App({history}: RouteComponentProps) {
   const [userInfo, setUserInfo] = useState<userInfo | null>({});
 
-  const onLogin = ()=>{
-    
+  const onLoginSuccess = (id: string)=>{
+    localStorage.setItem('userId', id);
+    history.push('/main');
   }
 
   const onLogout = ()=>{
-
+    localStorage.setItem('userId', '');
+    history.push('/');
   }
 
   // 글로벌 이벤트 판별
@@ -31,7 +35,6 @@ function App() {
     document.body.onclick = (e: MouseEvent): void=>{
       const dropDown: NodeListOf<Element> = document.querySelectorAll('div.drop-list');
       const targ = e.currentTarget as HTMLElement;
-      const targUp = targ.parentNode as HTMLElement;
 
       if(dropDown.length > 0){
         dropDown.forEach(el => {
@@ -46,13 +49,24 @@ function App() {
 
   return (
     <div className="app dark">
-      <appContext.Provider value={{onLogout, userInfo}}>
-        <Route path='/' exact render={()=> <div>루트</div>}></Route>
-        <Route path='/welcome' render={(props)=> <Welcome {...props}></Welcome>}></Route>
-        <Route path='/main' render={(props)=> <Main {...props}></Main>}></Route>
+      <appContext.Provider value={{onLoginSuccess, onLogout, userInfo}}>
+        <Switch>
+          <Route path='/' exact render={(props)=> <InitPage {...props}></InitPage>}></Route>
+          <Route path='/welcome' exact render={(props)=> <Welcome {...props}></Welcome>}></Route>
+          <Route path='/main' exact render={(props)=> <Main {...props}></Main>}></Route>
+          <Route component={NotFound}></Route>
+        </Switch>
       </appContext.Provider>
     </div>
   );
 }
 
-export default App;
+function InitPage({history}: RouteComponentProps){
+  useEffect(()=>{
+    if(localStorage.getItem('userId')) history.push('/main');
+    else history.push('/welcome');
+  }, []);
+  return <></>;
+}
+
+export default withRouter(App);

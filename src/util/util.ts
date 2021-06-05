@@ -8,7 +8,7 @@ interface optionAttr {
 }
 
 const UT = {
-    request : async ({method='POST', url='', body={}}: requestParam, callback?: (obj: resultAttr)=> void)=>{
+    request : async ({method='POST', url='', body={}}: requestParam, callback?: (obj: resultAttr<any>)=> void)=>{
         const option: optionAttr = {
             method: method,
             credentials: "same-origin",
@@ -23,7 +23,7 @@ const UT = {
             const res = await fetch('/api/' + url, option);
             if(res.status === 200){
                 UT.showLoading(false);
-                const result: resultAttr = await res.json();
+                const result = await res.json();
                 if(callback) callback(result);
             }else{
                 throw new Error('문제가 발생하였습니다.');

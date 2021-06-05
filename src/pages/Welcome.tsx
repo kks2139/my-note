@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 import Login from './Login';
 
 function Welcome({history}:RouteComponentProps){
     return (
-        <div>
-            웰컴!
-            <button onClick={()=> history.push('/main')}>go Main</button>
+        <div className='welcome-box'>
+            <div className='app-name'>My Note</div>
             <Login></Login>
         </div>
     );

@@ -18,7 +18,9 @@ function SessionBar({}: sessionBarProps){
     const context = useContext(appContext);
     
     const onLogoutClick = (): void=>{
-        context!.onLogout();
+        UT.confirm('로그아웃 하시겠습니까?', ()=>{
+            context!.onLogout();
+        });
     }
 
     const onInfoClick = (sel: infoItems): void=>{

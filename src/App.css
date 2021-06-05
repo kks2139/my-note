@@ -58,6 +58,36 @@ input {
   color: white;
 }
 
+/************* 애니메이션 *************/
+@keyframes loading-mask {
+  0% {transform: translateY(0);}
+  50% {transform: translateY(-30px);}
+  100% {transform: translateY(0);}
+}
+@keyframes color-change {
+  0% {color: var(--theme-color);}
+  50% {color: var(--theme-color-2);}
+  100% {color: var(--theme-color);}
+}
+/**************************************/
+
+.not-found {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+}
+.not-found > div {
+  background-color: var(--theme-dark-2);
+  box-shadow: 0 0 15px -3px black;
+  padding: 50px 0;
+}
+.not-found span {
+  font-weight: bold;
+  font-size: 50px;
+}
+
 .modal {
   z-index: 10;
   position: fixed;
@@ -75,7 +105,7 @@ input {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 380px;
-  height: 180px;
+  height: 170px;
   background-color: white;
   border-radius: var(--radius);
   box-shadow: var(--theme-shadow);
@@ -95,7 +125,7 @@ input {
   text-align: left;
   padding: 10px;
   margin: 6px;
-  height: 70px;
+  height: 60px;
   overflow: auto;
 }
 .dialog .dialog-btn-box {
@@ -157,15 +187,15 @@ input {
 
 .btn-1 {
   color: white;
-  background-color: var(--theme-color);
+  background-color: var(--theme-color) !important;
   border-radius: var(--radius-2);
   text-align: center;
   font-weight: bold;
   height: 28px;
   width: fit-content;
   line-height: 28px;
-  padding: 3px 10px;
-  border: 1px solid var(--theme-color);
+  padding: 3px 10px !important;
+  border: 1px solid var(--theme-color) !important;
   transition: box-shadow .2s, border .2s;
 }
 .btn-1:hover {
@@ -178,6 +208,21 @@ input {
   background-color: var(--theme-color-active);
 }
 
+.welcome-box {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.app-name {
+  font-size: 50px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 80px;
+  /* animation: color-change 1s ease 0s infinite normal; */
+}
+
 .login-back {
   width: 100vw;
   height: 500px;
@@ -187,10 +232,6 @@ input {
   background-color: wheat;
 }
 .login-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   color: black;
   background-color: white;
   border-radius: var(--radius);
@@ -280,12 +321,6 @@ input {
   cursor: pointer;
   color: white;
   background-color: var(--inactive-color);
-}
-
-@keyframes loading-mask {
-  0% {transform: translateY(0);}
-  50% {transform: translateY(-30px);}
-  100% {transform: translateY(0);}
 }
 
 .loadmask {

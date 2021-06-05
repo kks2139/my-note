@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {Button, Input} from '../components/CompLink';
 import {styleAttr, requestParam, resultAttr} from '../util/interfaces';
 import UT from '../util/util';
+import {appContext} from '../App';
 
 interface stateObj {
     isJoin: boolean;
@@ -10,10 +11,14 @@ interface stateObj {
     pw: string;
     pw2: string;
 }
-
+type loginInfo = {
+    id: string;
+    pw: string;
+};
 type inputEl = HTMLInputElement | null;
 
 function Login(){
+    const context = useContext(appContext);
     const [info, setInfo] = useState<stateObj>({
         isJoin : false,
         loginTxt : '로그인',
@@ -58,17 +63,17 @@ function Login(){
         if(el1 && el2){
             if(validate(el1, el2)){
                 const param: requestParam = {
-                    url : 'getUser',
+                    url : 'login',
                     body : {
                         id : el1.value,
                         pw : el2.value
                     }
                 }
-                UT.request(param, (res: resultAttr)=>{
-                    if(res.data!.length === 0){
+                UT.request(param, ({data}: resultAttr<loginInfo>)=>{
+                    if(data.length === 0){
                         UT.alert('아이디 혹은 비밀번호를 다시 확인하세요.');
                     }else{
-
+                        context!.onLoginSuccess(data[0].id!);
                     }
                 });
             }
@@ -90,9 +95,12 @@ function Login(){
                         pw : el1.value
                     }
                 }
-                UT.request(param, (res)=>{
-                    // 로그인 구현
-                    UT.toastMsg(res.errMsg);
+                UT.request(param, ({data})=>{
+                    if(data.length === 0){
+                        // UT.alert('아이디 혹은 비밀번호를 다시 확인해주세요.');
+                    }else{
+
+                    }
                 });
             }
         }
@@ -132,7 +140,7 @@ function Login(){
     
     const divStyle: styleAttr = {
         position: 'absolute',
-        top: '75%',
+        top: '85%',
         left: '50%',
         transform: 'translate(-50%, -50%)'
     }
