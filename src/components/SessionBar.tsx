@@ -32,7 +32,7 @@ function SessionBar({}: sessionBarProps){
         <div className='sessionbar-box'>
             <div className='session-title-1'>
                 <div className='session-sub-1'>My Note</div>
-                <div className='session-sub-2'>'KKS'님 안녕하세요</div>
+                <div className='session-sub-2'>{`'${localStorage.getItem('userId')}' 님 안녕하세요!`}</div>
             </div>
             <Pusher></Pusher>
             <div className='session-title-3'>

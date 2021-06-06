@@ -15,6 +15,12 @@ const sqlMap = {
          where id = ?
            and pw = ? 
     `,
+    insertUser : `
+        insert into user_note
+        (id, pw) 
+        values
+        (?, ?)
+    `
 };
 
 const doQuery = async (sqlId, p)=>{
@@ -24,7 +30,9 @@ const doQuery = async (sqlId, p)=>{
         
         switch(sqlId){
             case 'getUser': params = [p.id, p.pw];
-            break;
+                break;
+            case 'insertUser': params = [p.id, p.pw];
+                break;
         }
         
     const conn = await db.getConnection(async c => c);

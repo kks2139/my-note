@@ -29,7 +29,8 @@ function Login(){
     const boxRef = useRef<HTMLDivElement | null>(null);
     
     const onEnter = (e: React.KeyboardEvent<HTMLInputElement>): void=>{
-        onLogin();
+        if(info.isJoin) onJoin();
+        else onLogin();
     }
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -92,14 +93,22 @@ function Login(){
                     url : 'join',
                     body : {
                         id : el1.value,
-                        pw : el1.value
+                        pw : el2.value
                     }
                 }
-                UT.request(param, ({data})=>{
-                    if(data.length === 0){
-                        // UT.alert('아이디 혹은 비밀번호를 다시 확인해주세요.');
+                UT.request(param, ({errMsg})=>{
+                    if(errMsg){
+                        UT.alert('이미 존재하는 아이디 입니다.');
                     }else{
-
+                        UT.alert('가입이 완료되었습니다.', ()=>{
+                            setInfo({
+                                isJoin : !info.isJoin,
+                                loginTxt : info.isJoin ? '로그인' : '회원가입',
+                                id : '',
+                                pw : '',
+                                pw2 : ''
+                            });
+                        });
                     }
                 });
             }

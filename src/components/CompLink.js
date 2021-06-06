@@ -5,6 +5,8 @@ import Pusher from './Pusher';
 import DropDownList from './DropDownList';
 import Clock from './Clock';
 import VerticalNavi from './VerticalNavi';
+import NoteList from './NoteList';
+import NoteLabel from './NoteLabel';
 
 export {
     Input, 
@@ -13,5 +15,7 @@ export {
     Pusher,
     DropDownList,
     Clock,
-    VerticalNavi
+    VerticalNavi,
+    NoteList,
+    NoteLabel
 };

@@ -52,8 +52,8 @@ function App({history}: RouteComponentProps) {
       <appContext.Provider value={{onLoginSuccess, onLogout, userInfo}}>
         <Switch>
           <Route path='/' exact render={(props)=> <InitPage {...props}></InitPage>}></Route>
-          <Route path='/welcome' exact render={(props)=> <Welcome {...props}></Welcome>}></Route>
-          <Route path='/main' exact render={(props)=> <Main {...props}></Main>}></Route>
+          <Route path='/welcome' render={(props)=> <Welcome {...props}></Welcome>}></Route>
+          <Route path='/main' render={(props)=> <Main {...props}></Main>}></Route>
           <Route component={NotFound}></Route>
         </Switch>
       </appContext.Provider>
