@@ -4,7 +4,28 @@ import {Button, SessionBar, VerticalNavi, NoteList} from '../components/CompLink
 
 function Main({history}:RouteComponentProps){
     const [info, setInfo] = useState({
-        noteList : ['할일', 'React', 'Javascript', 'Typescript']
+        noteList : [
+            {
+                noteId : '1',
+                noteName : '할일',
+                order : '1'
+            },
+            {
+                noteId : '2',
+                noteName : 'React',
+                order : '2'
+            },
+            {
+                noteId : '3',
+                noteName : 'Javascript',
+                order : '3'
+            },
+            {
+                noteId : '4',
+                noteName : 'Typescript',
+                order : '4'
+            },
+        ]
     });    
 
     useEffect(()=>{

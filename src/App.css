@@ -361,9 +361,10 @@ input {
 }
 
 .noteList-box {
-
+  /* background-color: white; */
 }
 .noteLabel-box {
+  position: relative;
   background-color: rgb(97, 97, 97);
   height: 35px;
   text-align: left;
@@ -373,8 +374,14 @@ input {
   margin: 0 0 5px 0;
   transition: font-size .3s;
   padding-left: 10px;
+  border-radius: var(--radius);
 }
 .noteLabel-box:hover {
   cursor: pointer;
   font-size: 17px;
 }
+.noteLabel-box:active {
+  z-index: 5;
+  transform: scale(1.2);
+}
+
