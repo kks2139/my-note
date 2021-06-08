@@ -382,6 +382,9 @@ input {
 }
 .noteLabel-box:active {
   z-index: 5;
-  transform: scale(1.2);
+  opacity: .8;
+  transform: scale(1.1);
 }
-
+.covered {
+  background-color: rgb(255, 180, 180);
+}

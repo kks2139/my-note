@@ -28,6 +28,20 @@ function Main({history}:RouteComponentProps){
         ]
     });    
 
+    const onOrderChanged = (selected: string, covered: string)=>{
+        const i1 = info.noteList.findIndex(d => d.noteId === selected);
+        const i2 = info.noteList.findIndex(d => d.noteId === covered);
+
+        let tmp = info.noteList[i1];
+        info.noteList[i1] = info.noteList[i2];
+        info.noteList[i2] = tmp;
+
+        setInfo({
+            ...info,
+            noteList : info.noteList.slice()
+        });
+    }
+
     useEffect(()=>{
         if(!localStorage.getItem('userId')){
             history.push('/welcome');
@@ -38,7 +52,7 @@ function Main({history}:RouteComponentProps){
         <div>
             <SessionBar></SessionBar>
             <VerticalNavi>
-                <NoteList noteList={info.noteList}></NoteList>
+                <NoteList noteList={info.noteList} onOrderChanged={onOrderChanged}></NoteList>
             </VerticalNavi>
         </div>
     );

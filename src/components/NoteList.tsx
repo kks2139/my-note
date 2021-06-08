@@ -9,14 +9,14 @@ interface noteAttr {
 
 interface noteListProps {
     noteList: noteAttr[];
+    onOrderChanged: (val1: string, val2: string)=>void;
 }
 
-function NoteList({noteList}: noteListProps){
+function NoteList({noteList, onOrderChanged}: noteListProps){
 
     return (
         <div className='noteList-box'>
-            {noteList.map(note => <NoteLabel key={note.noteId} {...note}></NoteLabel>)}
-            
+            {noteList.map(note => <NoteLabel key={note.noteId} {...note} hasChanged={onOrderChanged}></NoteLabel>)}
         </div>
     );
 }

@@ -4,14 +4,17 @@ interface noteLabelProps {
     noteId: string;
     noteName: string;
     order: string;
+    hasChanged: (val1: string, val2: string)=>void;
 }
 
-function NoteLabel({noteId, noteName, order}: noteLabelProps){
+type eType = React.MouseEvent<HTMLDivElement>;
+
+function NoteLabel({noteId, noteName, order, hasChanged}: noteLabelProps){
     const prePos = useRef({x : 0, y : 0});
     const isDown = useRef(false);
     const divRef = useRef<HTMLDivElement | null>(null);
 
-    const onMouseDown = (e: React.MouseEvent<HTMLDivElement>)=>{
+    const onMouseDown = (e: eType)=>{
         prePos.current = {
             x : e.pageX,
             y : e.pageY
@@ -19,19 +22,20 @@ function NoteLabel({noteId, noteName, order}: noteLabelProps){
         isDown.current = true;
     }
     
-    const onMouseMove = (e: React.MouseEvent<HTMLDivElement>)=>{
+    const onMouseMove = (e: eType)=>{
         traceMouse(e);
     }
-
-    const onMouseLeave = (e: React.MouseEvent<HTMLDivElement>)=>{
+    
+    const onMouseLeave = (e: eType)=>{
         traceMouse(e);
         if(isMouseOut(e)){
             moveEnd();
         }
     }
-    
+        
     const onMouseUp = ()=>{
         moveEnd();
+        changeOrder();
     }
     
     const moveEnd = ()=>{
@@ -41,7 +45,7 @@ function NoteLabel({noteId, noteName, order}: noteLabelProps){
         isDown.current = false;
     }
 
-    const traceMouse = (e: React.MouseEvent<HTMLDivElement>)=>{
+    const traceMouse = (e: eType)=>{
         if(isDown.current){
             const el = divRef.current;
             
@@ -53,22 +57,53 @@ function NoteLabel({noteId, noteName, order}: noteLabelProps){
             
             prePos.current.x = e.pageX;
             prePos.current.y = e.pageY;
-            
+
+            checkCollision(e);
         }
     }
-
-    // 포인터가 브라우저 창 밖으로 나갔을때 처리 
-    const isMouseOut = (e: React.MouseEvent<HTMLDivElement>): boolean=>{
+    
+    // 포인터가 브라우저 창 밖으로 나갔을때
+    const isMouseOut = (e: eType): boolean=>{
         const [x, y] = [e.pageX, e.pageY];
         return x <=0 || y <= 0 ? true : false;
     };
+
+    const checkCollision = (e: eType)=>{
+        let result = '';
+        const el = divRef.current;
+        const [currX, currY] = [e.pageX, e.pageY]; 
+        const notes = e.currentTarget.parentNode!.children;
+        const others: HTMLDivElement[] = Array.prototype.filter.call(notes, n => n.dataset.id !== el!.dataset.id );
+
+        others.forEach(n =>{
+            const {x, y, width, height} = n.getBoundingClientRect();
+            const eX = x + width,
+                  eY = y + height;
+
+            if(currX > x && currX < eX && currY > y && currY < eY){
+                n.classList.add('covered');
+            }else{
+                n.classList.remove('covered');
+            }
+        });
+        return result;
+    }
+
+    const changeOrder = ()=>{
+        const covered: HTMLDivElement | null = document.querySelector('div.covered');
+        const el = divRef.current;
+
+        if(covered){
+            hasChanged(el!.dataset.id!, covered.dataset.id!);
+        }
+    }
 
     useEffect(()=>{
         moveEnd();
     }, []);
 
     return (
-        <div className='noteLabel-box' ref={divRef} data-id={noteId} data-ord={order} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseMove={onMouseMove} onMouseUp={onMouseUp}>
+        <div className='noteLabel-box note-sel' ref={divRef} data-id={noteId} data-ord={order} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseMove={onMouseMove} onMouseUp={onMouseUp}>
             <div>{`${noteName}`}</div>
         </div>
     );
