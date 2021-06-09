@@ -8,11 +8,9 @@ function VerticalNavi({children}: verticalNaviProps){
 
     return (
         <div className='vertical-navi'>
-            <div style={{height : '50px'}}></div>
             
-            contents start
-
             <div className='vertical-navi-cont'>
+                <div style={{height : '50px'}}></div>
                 {children}
             </div>
         </div>

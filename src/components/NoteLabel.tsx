@@ -4,12 +4,13 @@ interface noteLabelProps {
     noteId: string;
     noteName: string;
     order: string;
+    color: string;
     hasChanged: (val1: string, val2: string)=>void;
 }
 
 type eType = React.MouseEvent<HTMLDivElement>;
 
-function NoteLabel({noteId, noteName, order, hasChanged}: noteLabelProps){
+function NoteLabel({noteId, noteName, order, color, hasChanged}: noteLabelProps){
     const prePos = useRef({x : 0, y : 0});
     const isDown = useRef(false);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -24,6 +25,9 @@ function NoteLabel({noteId, noteName, order, hasChanged}: noteLabelProps){
     
     const onMouseMove = (e: eType)=>{
         traceMouse(e);
+        if(isMouseOut(e)){
+            moveEnd();
+        }
     }
     
     const onMouseLeave = (e: eType)=>{
@@ -64,8 +68,8 @@ function NoteLabel({noteId, noteName, order, hasChanged}: noteLabelProps){
     
     // 포인터가 브라우저 창 밖으로 나갔을때
     const isMouseOut = (e: eType): boolean=>{
-        const [x, y] = [e.pageX, e.pageY];
-        return x <=0 || y <= 0 ? true : false;
+        const [x, y, winX, winY] = [e.pageX, e.pageY, window.innerWidth, window.innerHeight];
+        return x <=0 || y <= 0 || winX <= x || winY <= y ? true : false;
     };
 
     const checkCollision = (e: eType)=>{
@@ -92,21 +96,23 @@ function NoteLabel({noteId, noteName, order, hasChanged}: noteLabelProps){
     const changeOrder = ()=>{
         const covered: HTMLDivElement | null = document.querySelector('div.covered');
         const el = divRef.current;
-
         if(covered){
             hasChanged(el!.dataset.id!, covered.dataset.id!);
+            covered.classList.remove('covered');
         }
     }
 
     useEffect(()=>{
+        divRef.current!.style.borderLeft = `7px solid ${color}`;
         moveEnd();
     }, []);
 
     return (
-        <div className='noteLabel-box note-sel' ref={divRef} data-id={noteId} data-ord={order} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseMove={onMouseMove} onMouseUp={onMouseUp}>
+        <div className='noteLabel-box' ref={divRef} data-id={noteId} data-ord={order} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onMouseMove={onMouseMove} onMouseUp={onMouseUp}>
             <div>{`${noteName}`}</div>
         </div>
     );
 }
+
 
 export default NoteLabel;

@@ -1,7 +1,11 @@
 import React from 'react';
 
-function Pusher(){
-    return <div className='pusher'></div>;
+interface puhserProps {
+    type?: string;
+}
+
+function Pusher({type='w'}: puhserProps){
+    return <div className={type === 'w' ? 'push-w' : 'push-h'}></div>;
 }
 
 export default Pusher;

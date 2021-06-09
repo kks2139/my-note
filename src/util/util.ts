@@ -140,6 +140,19 @@ const UT = {
                 modalRoot!.removeChild(modalRoot!.firstChild);
             }
         }
+    },
+
+    rand : (n: number): number=>{ // 0 ~ n 사이의 랜덤숫자 리턴
+        if(isNaN(n)) return 0;
+        else{
+            const pos = Math.pow(10, Number(("" + n).length));
+            return Number((Math.random() * pos % n).toFixed());
+        }
+    },
+
+    randomColor : (): string=>{
+        const [r1, r2, r3] = [UT.rand(256), UT.rand(256), UT.rand(256)];
+        return `rgb(${r1}, ${r2}, ${r3})`;
     }
 }
 

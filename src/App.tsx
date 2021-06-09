@@ -30,7 +30,7 @@ function App({history}: RouteComponentProps) {
     history.push('/');
   }
 
-  // 글로벌 이벤트 판별
+  // element 이벤트 판별
   useEffect(()=>{
     document.body.onclick = (e: MouseEvent): void=>{
       const dropDown: NodeListOf<Element> = document.querySelectorAll('div.drop-list');

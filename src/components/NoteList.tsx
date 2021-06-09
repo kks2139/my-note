@@ -5,6 +5,7 @@ interface noteAttr {
     noteId: string;
     noteName: string;
     order: string;
+    color: string;
 }
 
 interface noteListProps {
