@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {RouteComponentProps} from 'react-router-dom';
-import {Button, SessionBar, VerticalNavi, NoteList, Pusher} from '../components/CompLink';
+import {Button, SessionBar, VerticalNavi, NoteList, Pusher, NaviFooter} from '../components/CompLink';
 import UT from '../util/util';
 
 function Main({history}:RouteComponentProps){
@@ -33,7 +33,7 @@ function Main({history}:RouteComponentProps){
         ]
     });    
 
-    const onOrderChanged = (selected: string, covered: string)=>{
+    const onOrderChange = (selected: string, covered: string)=>{
         const i1 = info.noteList.findIndex(d => d.noteId === selected);
         const i2 = info.noteList.findIndex(d => d.noteId === covered);
 
@@ -54,15 +54,12 @@ function Main({history}:RouteComponentProps){
     }, []);
 
     return (
-        <div className='main-box'>
+        <div id='mainPage' className='main-box'>
             <SessionBar></SessionBar>
             <VerticalNavi>
-                <NoteList noteList={info.noteList} onOrderChanged={onOrderChanged}></NoteList>
+                <NoteList noteList={info.noteList} onOrderChange={onOrderChange}></NoteList>
                 <Pusher type='h'></Pusher>
-                <div className='navi-footer'>
-                    <div>노트추가</div>
-                    <div>편집</div>
-                </div>
+                <NaviFooter></NaviFooter>
             </VerticalNavi>
         </div>
     );

@@ -7,6 +7,7 @@ import Clock from './Clock';
 import VerticalNavi from './VerticalNavi';
 import NoteList from './NoteList';
 import NoteLabel from './NoteLabel';
+import NaviFooter from './NaviFooter';
 
 export {
     Input, 
@@ -17,5 +18,6 @@ export {
     Clock,
     VerticalNavi,
     NoteList,
-    NoteLabel
+    NoteLabel,
+    NaviFooter
 };

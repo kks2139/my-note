@@ -9,7 +9,7 @@
   --theme-warn : rgba(255, 70, 64, 0.76);
   --inactive-color : rgb(175, 175, 175);
   --theme-shadow : 0px 0px 10px -1px black;
-  --theme-shadow-2 : 0px 1px 20px 2px rgb(31, 31, 31);
+  --theme-shadow-2 : 0px 1px 20px 0px rgb(31, 31, 31);
   --radius: 5px;
   --radius-2: 20px;
 }
@@ -384,7 +384,7 @@ input {
   margin: 0 0 5px 0;
   padding-left: 10px;
   border-radius: var(--radius);
-  transition: background-color .2s, font-size .2s, top -1s, left -1s;
+  transition: background-color .2s, font-size .2s, top .1s, left .1s;
 }
 .noteLabel-box:hover {
   cursor: pointer;
@@ -394,30 +394,62 @@ input {
   z-index: 5;
   opacity: .7;
   transform: scale(0.9);
-}
-.noteLabel-selected {
-
+  transition: none;
 }
 .covered {
   background-color: white;
   color: black;
 }
 
-.navi-footer {
+.navi-footer-box {
+  display: flex;
+  flex-direction: column;
+
+}
+.footer-input-box {
   position: relative;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  border-radius: var(--radius);
+  background-color: white;
+  color: black;
+  transition: top .3s;
+}
+.footer-input-hide {top: 0px;}
+.wrap-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.footer-buttons {
   display: flex;
 }
-.navi-footer > div {
+.footer-buttons > div {
+  opacity: .5;
+  z-index: 1;
   width: 100%;
-  /* border: 1px solid white; */
   padding: 10px 0;
   text-align: center;
   font-weight: bold; 
   background-color: black;
-  transition: background-color .2s, color .2s;
+  transition: background-color .2s, color .2s, font-size .2s;
 }
-.navi-footer > div:hover {
+.footer-buttons > div:hover {
   cursor: pointer;
   background-color: white;
   color: black;
+}
+.footer-buttons > div:active {
+  font-size: smaller;
+}
+
+.add-input-box {
+  display: flex;
+  position: relative;
+  background-color: white !important;
+  color: black;
+  border-radius: var(--radius);
 }

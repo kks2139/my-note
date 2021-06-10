@@ -151,7 +151,7 @@ const UT = {
     },
 
     randomColor : (): string=>{
-        const [r1, r2, r3] = [UT.rand(256), UT.rand(256), UT.rand(256)];
+        const [r1, r2, r3] = [UT.rand(255), UT.rand(255), UT.rand(255)];
         return `rgb(${r1}, ${r2}, ${r3})`;
     }
 }
