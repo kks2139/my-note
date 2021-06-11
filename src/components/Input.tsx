@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {styleAttr} from '../util/interfaces';
 
 interface inputProps {
@@ -6,6 +6,7 @@ interface inputProps {
     text?: string;
     name?: string;
     id?: string;
+    invalid?: boolean;
     maxLength?: number;
     style?: styleAttr;
     hidden?: boolean;
@@ -13,7 +14,7 @@ interface inputProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>)=> void;
 }
 
-function Input({placeholder, text, id, name, maxLength, onEnter, onChange, hidden=false, style}: inputProps){
+function Input({placeholder, text, id, name, invalid, maxLength, onEnter, onChange, hidden=false, style}: inputProps){
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>):void=>{
         if(e.key === 'Enter' && onEnter){
             onEnter(e);
@@ -26,9 +27,21 @@ function Input({placeholder, text, id, name, maxLength, onEnter, onChange, hidde
         }
     }
 
+    useEffect(()=>{
+
+    });
+
     return (
         <div id={id} hidden={hidden}>
-            <input className='input-1' placeholder={placeholder} value={text} name={name} maxLength={maxLength} onChange={valueChange} onKeyDown={onKeyDown} style={style}></input>
+            <input className={`input-1 ${invalid ? 'input-invalid' : ''}`} 
+                   placeholder={placeholder} 
+                   value={text} 
+                   name={name} 
+                   maxLength={maxLength} 
+                   onChange={valueChange} 
+                   onKeyDown={onKeyDown} 
+                   style={style}>
+            </input>
         </div>
     )
 }

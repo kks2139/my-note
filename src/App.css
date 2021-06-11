@@ -4,7 +4,7 @@
   --theme-color: rgb(49, 49, 49);
   --theme-color-hover: rgb(0, 0, 0);
   --theme-color-active: rgb(73, 73, 73);
-  --theme-color-2: rgb(111, 197, 255);
+  --theme-color-2: rgb(69, 218, 143);
   --theme-color-3: rgb(67, 186, 255);
   --theme-warn : rgba(255, 70, 64, 0.76);
   --inactive-color : rgb(175, 175, 175);
@@ -166,29 +166,34 @@ input {
 
 .input-1 {
   caret-color: var(--theme-color);
-  border: 1px solid var(--inactive-color);
+  border: 2px solid var(--inactive-color);
   border-radius: var(--radius);
   padding: 7px 7px 7px 15px;
   width: 200px;
   height: 35px;
   margin: 1px;
   box-sizing: border-box;
-  transition: border .1s;
+  transition: border .2s;
 }
 .input-1:hover {
-  border: 3px solid var(--theme-color-2);
+  border: 2px solid var(--theme-color-2);
 }
 .input-1:focus {
-  border: 3px solid var(--theme-color-2);
+  border: 2px solid var(--theme-color-2);
 }
 .input-1::placeholder {
   color: var(--inactive-color);
   padding: 5px;
 }
 
+.input-invalid {
+  border-color: var(--theme-warn) !important;
+  background-color: rgba(255, 182, 182, 0.3);
+}
+
 .btn-1 {
   color: white;
-  background-color: var(--theme-color) !important;
+  background-color: var(--theme-color);
   border-radius: var(--radius-2);
   text-align: center;
   font-weight: bold;
@@ -196,17 +201,16 @@ input {
   width: fit-content;
   line-height: 28px;
   padding: 3px 10px !important;
-  border: 1px solid var(--theme-color) !important;
-  transition: box-shadow .2s, border .2s;
+  transition: box-shadow .2s, border .2s, background-color .3s, color .3s;
 }
 .btn-1:hover {
+  color: black;
+  background-color: white;
   cursor: pointer;
-  box-shadow: 0px 0px 5px 2px var(--theme-color-2);
-  /* box-shadow: var(--theme-shadow); */
-  border: 1px solid var(--inactive-color);
+  box-shadow: 0 3px 10px -3px black;
 }
 .btn-1:active {
-  background-color: var(--theme-color-active);
+  background-color: var(--theme-color-2);
 }
 
 .welcome-box {
@@ -270,7 +274,7 @@ input {
   font-weight: bold;
   text-align: center;
   margin-right: 15px;
-  color: var(--theme-color);
+  color: var(--theme-color-2);
 }
 .session-sub-2 {
   font-size: 16px;
@@ -387,6 +391,7 @@ input {
   transition: background-color .2s, font-size .2s, top .1s, left .1s;
 }
 .noteLabel-box:hover {
+  background-color: rgb(129, 129, 129);
   cursor: pointer;
   font-size: 17px;
 }
@@ -428,7 +433,6 @@ input {
   display: flex;
 }
 .footer-buttons > div {
-  opacity: .5;
   z-index: 1;
   width: 100%;
   padding: 10px 0;
