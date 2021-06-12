@@ -4,7 +4,7 @@
   --theme-color: rgb(49, 49, 49);
   --theme-color-hover: rgb(0, 0, 0);
   --theme-color-active: rgb(73, 73, 73);
-  --theme-color-2: rgb(69, 218, 143);
+  --theme-color-2: #29eba0;
   --theme-color-3: rgb(67, 186, 255);
   --theme-warn : rgba(255, 70, 64, 0.76);
   --inactive-color : rgb(175, 175, 175);
@@ -366,12 +366,41 @@ input {
   width: 200px;
   box-shadow: var(--theme-shadow);
   background-color: rgb(155, 155, 155);
+  transition: transform .3s;
 }
 .vertical-navi-cont {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
+.vertical-navi-hide {
+  transform: translateX(-100%);
+}
+.vertical-navi-sub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  transform: translate(200px, -100%);
+  width: 30px;
+  height: 80px;
+  /* font-weight: bold; */
+  font-size: 25px;
+  text-align: center;
+  background-color: rgb(105, 105, 105);
+  box-shadow: 7px 3px 10px -7px black;
+  border-top-right-radius: var(--radius-2);
+  border-bottom-right-radius: var(--radius-2);
+}
+.vertical-navi-sub:hover {
+  cursor: pointer;
+}
+.vertical-navi-sub > div {
+  transition: transform .5s;
+}
+
+.turn-180 {transform: rotate(180deg);}
+.turn-un-180 {transform: rotate(-180deg);}
 
 .noteList-box {
   /* background-color: white; */

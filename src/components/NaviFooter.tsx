@@ -40,7 +40,7 @@ function NaviFooter(){
                     result = false;
                 }
                 break;
-            case 'add':
+            case '':
                 break;
         }
         return result;
