@@ -69,6 +69,12 @@ input {
   50% {color: var(--theme-color-2);}
   100% {color: var(--theme-color);}
 }
+@keyframes shaking {
+  0% {transform: rotate(0deg);}
+  35% {transform: rotate(1deg);}
+  70% {transform: rotate(-1deg);}
+  100% {transform: rotate(0deg);}
+}
 /**************************************/
 
 .not-found {
@@ -382,15 +388,15 @@ input {
   justify-content: center;
   position: relative;
   transform: translate(200px, -100%);
-  width: 30px;
+  width: 25px;
   height: 80px;
   /* font-weight: bold; */
   font-size: 25px;
   text-align: center;
   background-color: rgb(105, 105, 105);
   box-shadow: 7px 3px 10px -7px black;
-  border-top-right-radius: var(--radius-2);
-  border-bottom-right-radius: var(--radius-2);
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
 }
 .vertical-navi-sub:hover {
   cursor: pointer;
@@ -430,9 +436,15 @@ input {
   transform: scale(0.9);
   transition: none;
 }
+.noteLabel-box > input {
+  border-radius: var(--radius);
+}
 .covered {
   background-color: white;
   color: black;
+}
+.shaking {
+  animation: shaking .3s linear 0s infinite normal;
 }
 
 .navi-footer-box {
