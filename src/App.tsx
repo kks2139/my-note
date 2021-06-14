@@ -4,6 +4,7 @@ import Welcome from './pages/Welcome';
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
 import './App.css';
+import './Style.css';
 
 interface userInfo {
 
