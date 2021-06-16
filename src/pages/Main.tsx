@@ -30,7 +30,8 @@ function Main({history}:RouteComponentProps){
                 order : '4',
                 color :  UT.randomColor()
             },
-        ]
+        ],
+        isNoteLabelEdit : false
     });    
 
     const onOrderChange = (selected: string, covered: string)=>{
@@ -47,6 +48,13 @@ function Main({history}:RouteComponentProps){
         });
     }
 
+    const onEdit = (val: boolean)=>{
+        setInfo({
+            ...info,
+            isNoteLabelEdit : val
+        });
+    }
+
     useEffect(()=>{
         if(!localStorage.getItem('userId')){
             history.push('/welcome');
@@ -57,9 +65,9 @@ function Main({history}:RouteComponentProps){
         <div id='mainPage' className='main-box'>
             <SessionBar></SessionBar>
             <VerticalNavi>
-                <NoteList noteList={info.noteList} onOrderChange={onOrderChange}></NoteList>
+                <NoteList noteList={info.noteList} onOrderChange={onOrderChange} editMode={info.isNoteLabelEdit}></NoteList>
                 <Pusher type='h'></Pusher>
-                <NaviFooter></NaviFooter>
+                <NaviFooter onEdit={onEdit}></NaviFooter>
             </VerticalNavi>
         </div>
     );

@@ -12,6 +12,7 @@
   --theme-shadow-2 : 0px 1px 20px 0px rgb(31, 31, 31);
   --radius: 5px;
   --radius-2: 20px;
+  --ani-shaking: shaking .7s linear 0s infinite normal;
 }
 
 /* 텍스트 드래그 차단 */

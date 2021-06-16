@@ -11,11 +11,12 @@ interface noteAttr {
 interface noteListProps {
     noteList: noteAttr[];
     onOrderChange: (val1: string, val2: string)=>void;
+    editMode: boolean;
 }
 
 type eType = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
-function NoteList({noteList, onOrderChange}: noteListProps){
+function NoteList({noteList, onOrderChange, editMode}: noteListProps){
     const prePos = useRef({x : 0, y : 0});
     
     const onMouseDown = (e: eType)=>{
@@ -103,7 +104,7 @@ function NoteList({noteList, onOrderChange}: noteListProps){
 
     return (
         <div className='noteList-box'>
-            {noteList.map(note => <NoteLabel key={note.noteId} {...note} onDown={onMouseDown} onUp={onMouseUp}></NoteLabel>)}
+            {noteList.map(note => <NoteLabel key={note.noteId} {...note} edit={editMode} onDown={onMouseDown} onUp={onMouseUp}></NoteLabel>)}
         </div>
     );
 }

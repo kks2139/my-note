@@ -203,12 +203,12 @@
 .noteLabel-box > input {
     border-radius: var(--radius);
 }
+.noteLabel-edit {
+    /* animation: var(--ani-shaking); */
+}
 .covered {
     background-color: white;
     color: black;
-}
-.shaking {
-    animation: shaking .7s linear 0s infinite normal;
 }
 
 .navi-footer-box {
@@ -222,7 +222,8 @@
     flex-direction: column;
     justify-content: center;
     height: 100px;
-    border-radius: var(--radius);
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
     background-color: white;
     color: black;
     transition: top .3s;
@@ -252,6 +253,11 @@
 }
 .footer-buttons > div:active {
     font-size: smaller;
+}
+
+.footer-btn-sel {
+    background-color: white !important;
+    color: black !important;
 }
 
 .add-input-box {

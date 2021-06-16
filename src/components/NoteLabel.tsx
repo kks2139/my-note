@@ -33,7 +33,7 @@ function NoteLabel({noteId, noteName, order, color, edit=false, onDown, onUp}: n
     }, []);
 
     return (
-        <div className='noteLabel-box shaking' ref={divRef} data-id={noteId} data-ord={order} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+        <div className='noteLabel-box' ref={divRef} data-id={noteId} data-ord={order} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
             {edit ? 
                 <input value={label} onChange={onChange}></input> : 
                 <div>{`${noteName}`}</div>
