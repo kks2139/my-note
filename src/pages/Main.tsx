@@ -1,42 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {RouteComponentProps} from 'react-router-dom';
-import {Button, SessionBar, VerticalNavi, NoteList, Pusher, NaviFooter} from '../components/CompLink';
+import {Button, SessionBar, VerticalNavi, NoteList, Pusher, NaviFooter, ContentBox} from '../components/CompLink';
+import {appContext} from '../App';
+import {noteListAttr} from '../util/interfaces';
 import UT from '../util/util';
 
+interface stateType {
+    noteList: noteListAttr[];
+    isNoteLabelEdit: boolean;
+}
+
 function Main({history}:RouteComponentProps){
-    const [info, setInfo] = useState({
-        noteList : [
-            {
-                noteId : '1',
-                noteName : '할일',
-                order : '1',
-                color :  UT.randomColor()
-            },
-            {
-                noteId : '2',
-                noteName : 'React',
-                order : '2',
-                color :  UT.randomColor()
-            },
-            {
-                noteId : '3',
-                noteName : 'Javascript',
-                order : '3',
-                color :  UT.randomColor()
-            },
-            {
-                noteId : '4',
-                noteName : 'Typescript',
-                order : '4',
-                color :  UT.randomColor()
-            },
-        ],
+    const context = useContext(appContext);
+    const [info, setInfo] = useState<stateType>({
+        noteList : [],
         isNoteLabelEdit : false
     });    
 
     const onOrderChange = (selected: string, covered: string)=>{
-        const i1 = info.noteList.findIndex(d => d.noteId === selected);
-        const i2 = info.noteList.findIndex(d => d.noteId === covered);
+        const i1 = info.noteList.findIndex(d => d.note_id === selected);
+        const i2 = info.noteList.findIndex(d => d.note_id === covered);
 
         let tmp = info.noteList[i1];
         info.noteList[i1] = info.noteList[i2];
@@ -59,16 +42,33 @@ function Main({history}:RouteComponentProps){
         if(!localStorage.getItem('userId')){
             history.push('/welcome');
         }
+
+        const param = {
+            url : 'getNoteList',
+            body : {
+                user_id : localStorage.getItem('userId')
+            }
+        }
+        UT.request(param, (res)=>{
+            setInfo({
+                ...info,
+                noteList : res.data
+            })
+        })
+
     }, []);
 
     return (
         <div id='mainPage' className='main-box'>
             <SessionBar></SessionBar>
-            <VerticalNavi>
-                <NoteList noteList={info.noteList} onOrderChange={onOrderChange} editMode={info.isNoteLabelEdit}></NoteList>
-                <Pusher type='h'></Pusher>
-                <NaviFooter onEdit={onEdit}></NaviFooter>
-            </VerticalNavi>
+            <div style={{display : 'flex'}}>
+                <VerticalNavi>
+                    <NoteList noteList={info.noteList} onOrderChange={onOrderChange} editMode={info.isNoteLabelEdit}></NoteList>
+                    <Pusher type='h'></Pusher>
+                        <NaviFooter onEdit={onEdit}></NaviFooter>
+                </VerticalNavi>
+                <ContentBox></ContentBox>
+            </div>
         </div>
     );
 }

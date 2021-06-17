@@ -20,6 +20,12 @@ const sqlMap = {
         (id, pw) 
         values
         (?, ?)
+    `,
+    getNoteList : `
+        select * 
+          from note
+         where user_id = ? 
+      order by ord asc
     `
 };
 
@@ -32,6 +38,8 @@ const doQuery = async (sqlId, p)=>{
             case 'getUser': params = [p.id, p.pw];
                 break;
             case 'insertUser': params = [p.id, p.pw];
+                break;
+            case 'getNoteList': params = [p.user_id];
                 break;
         }
         

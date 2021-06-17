@@ -51,6 +51,7 @@
 .sessionbar-box > table {
     width: 100%;
 }
+.sessionbar-h {height: var(--sessionbar-h);}
 .session-title-1 {
     display: flex;
     min-width: 400px;
@@ -133,7 +134,8 @@
 
 .vertical-navi {
     height: 100vh;
-    width: 200px;
+    width: var(--vertical-navi-w);
+    min-width: var(--vertical-navi-w);
     box-shadow: var(--theme-shadow);
     background-color: rgb(155, 155, 155);
     transition: transform .3s;
@@ -178,7 +180,6 @@
 .noteLabel-box {
     position: relative;
     background-color: rgb(97, 97, 97);
-    /* border-left: 10px solid; */
     height: 35px;
     text-align: left;
     font-weight: bold;
@@ -266,4 +267,16 @@
     background-color: white !important;
     color: black;
     border-radius: var(--radius);
+}
+
+.content-box {
+    padding: 5px 15px;
+}
+.content-box textarea {
+    width: calc(100vw - var(--vertical-navi-w) - 30px);
+    height: calc(100% - 60px);
+    border-radius: var(--radius);
+    box-shadow: 0 0 5px 0px black;
+    background-color: rgb(70, 70, 70);
+    color: white;
 }

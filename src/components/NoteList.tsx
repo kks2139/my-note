@@ -1,15 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import {NoteLabel} from './CompLink';
-
-interface noteAttr {
-    noteId: string;
-    noteName: string;
-    order: string;
-    color: string;
-}
+import {noteListAttr} from '../util/interfaces';
 
 interface noteListProps {
-    noteList: noteAttr[];
+    noteList: noteListAttr[];
     onOrderChange: (val1: string, val2: string)=>void;
     editMode: boolean;
 }
@@ -104,7 +98,7 @@ function NoteList({noteList, onOrderChange, editMode}: noteListProps){
 
     return (
         <div className='noteList-box'>
-            {noteList.map(note => <NoteLabel key={note.noteId} {...note} edit={editMode} onDown={onMouseDown} onUp={onMouseUp}></NoteLabel>)}
+            {noteList.map(note => <NoteLabel key={note.note_id} {...note} edit={editMode} onDown={onMouseDown} onUp={onMouseUp}></NoteLabel>)}
         </div>
     );
 }

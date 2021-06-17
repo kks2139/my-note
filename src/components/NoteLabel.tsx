@@ -1,19 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
+import {noteListAttr} from '../util/interfaces';
 
 type eType = React.MouseEvent<HTMLDivElement>;
 
-interface noteLabelProps {
-    noteId: string;
-    noteName: string;
-    order: string;
-    color?: string;
-    edit?: boolean;
+interface noteLabelProps extends noteListAttr {
+    edit: boolean;
     onDown: (e: eType)=>void;
     onUp: (e: eType)=>void;
 }
 
-function NoteLabel({noteId, noteName, order, color, edit=false, onDown, onUp}: noteLabelProps){
-    const [label, setLabel] = useState(noteName);
+function NoteLabel({note_id, note_name, ord, color, edit=false, onDown, onUp}: noteLabelProps){
+    const [label, setLabel] = useState(note_name);
     const divRef = useRef<HTMLDivElement | null>(null);
 
     const onMouseDown = (e: eType)=>{
@@ -33,10 +30,10 @@ function NoteLabel({noteId, noteName, order, color, edit=false, onDown, onUp}: n
     }, []);
 
     return (
-        <div className='noteLabel-box' ref={divRef} data-id={noteId} data-ord={order} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+        <div className='noteLabel-box' ref={divRef} data-id={note_id} data-ord={ord} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
             {edit ? 
                 <input value={label} onChange={onChange}></input> : 
-                <div>{`${noteName}`}</div>
+                <div>{`${note_name}`}</div>
             }
             
         </div>

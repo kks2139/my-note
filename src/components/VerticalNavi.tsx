@@ -17,7 +17,7 @@ function VerticalNavi({children}: verticalNaviProps){
         <div className='vertical-navi' ref={divRef}>
             
             <div className='vertical-navi-cont'>
-                <div style={{height : '50px'}}></div>
+                <div className='sessionbar-h'></div>
                 {children}
             </div>
             <div className='vertical-navi-sub' onClick={onClickHide}>

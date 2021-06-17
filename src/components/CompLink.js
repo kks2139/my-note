@@ -8,6 +8,7 @@ import VerticalNavi from './VerticalNavi';
 import NoteList from './NoteList';
 import NoteLabel from './NoteLabel';
 import NaviFooter from './NaviFooter';
+import ContentBox from './ContentBox';
 
 export {
     Input, 
@@ -19,5 +20,6 @@ export {
     VerticalNavi,
     NoteList,
     NoteLabel,
-    NaviFooter
+    NaviFooter,
+    ContentBox
 };

@@ -44,3 +44,15 @@ export interface resultAttr<dataType> {
     errMsg: string;
     data : dataType[];
 }
+
+// 노트목록 조회 - 노트정보
+export interface noteListAttr {
+    user_id: string;
+    note_id: string;
+    note_name: string;
+    txt_cont: string;
+    ord: number;
+    color: string;
+    reg_dt: string;
+    mod_dt: string;
+}

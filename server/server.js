@@ -42,3 +42,11 @@ app.post('/api/join', async (req, res)=>{
         });
     }
 });
+
+app.post('/api/getNoteList', async (req, res)=>{
+    const {rows, error} = await doQuery('getNoteList', req.body);
+    res.send({
+        data : rows,
+        errMsg : error ? errorText : ''
+    });
+});

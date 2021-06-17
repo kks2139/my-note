@@ -13,6 +13,8 @@
   --radius: 5px;
   --radius-2: 20px;
   --ani-shaking: shaking .7s linear 0s infinite normal;
+  --vertical-navi-w : 200px;
+  --sessionbar-h : 50px;
 }
 
 /* 텍스트 드래그 차단 */
