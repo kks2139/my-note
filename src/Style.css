@@ -149,17 +149,18 @@
     transform: translateX(-100%);
 }
 .vertical-navi-sub {
+    z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-    transform: translate(200px, -100%);
+    transform: translate(200px, calc(-100% - 5px));
     width: 25px;
-    height: 80px;
+    height: 70px;
     /* font-weight: bold; */
     font-size: 25px;
     text-align: center;
-    background-color: rgb(105, 105, 105);
+    background-color: rgb(138, 138, 138);
     box-shadow: 7px 3px 10px -7px black;
     border-top-right-radius: var(--radius);
     border-bottom-right-radius: var(--radius);
@@ -188,17 +189,18 @@
     margin: 0 0 5px 0;
     padding-left: 10px;
     border-radius: var(--radius);
-    transition: background-color .2s, font-size .2s, top .1s, left .1s;
+    transition: background-color .2s, font-size .2s, top .1s, left .1s, border .2s;
 }
 .noteLabel-box:hover {
+    border-left-width: 15px !important;
     background-color: rgb(129, 129, 129);
     cursor: pointer;
     font-size: 17px;
 }
 .noteLabel-box:active {
     z-index: 5;
-    opacity: .7;
-    transform: scale(0.9);
+    opacity: .6;
+    /* transform: scale(0.9); */
     transition: none;
 }
 .noteLabel-box > input {
@@ -206,6 +208,9 @@
 }
 .noteLabel-edit {
     /* animation: var(--ani-shaking); */
+}
+.noteLabel-selected {
+    box-shadow: 0 0 3px 1px var(--theme-color-2);
 }
 .covered {
     background-color: white;
@@ -270,13 +275,36 @@
 }
 
 .content-box {
+    position: relative;
+    z-index: 0;
     padding: 5px 15px;
+    left: 0px;
+    transition: left .3s;
+}
+.content-box-note-name {
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    background-color: rgb(70, 70, 70);
+    width: fit-content;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+    font-weight: bold;
+    font-size: 20px;
 }
 .content-box textarea {
-    width: calc(100vw - var(--vertical-navi-w) - 30px);
-    height: calc(100% - 60px);
+    width: calc(100vw - var(--vertical-navi-w) - 50px);
+    height: calc(100% - 110px);
     border-radius: var(--radius);
     box-shadow: 0 0 5px 0px black;
     background-color: rgb(70, 70, 70);
     color: white;
+    padding: 10px;
+    transition: width .3s;
+}
+.content-box-expand {
+    left : calc(15px - var(--vertical-navi-w));
+}
+.content-box-expand > textarea {
+    width : calc(100vw - 60px);
 }

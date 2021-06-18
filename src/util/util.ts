@@ -119,8 +119,8 @@ const UT = {
 
         
         if(show){
-            //const text: string[] = ['L','o','a','d','i','n','g','.','.','.'];
-            const text: string[] = ['처','리','중','.','.','.',];
+            // const text = 'Loading...';
+            const text = '로딩중...';
             const back: HTMLDivElement = document.createElement('div');
             const box: HTMLDivElement = document.createElement('div');
     

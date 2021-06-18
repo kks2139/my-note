@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function ContentBox(){
+type eType = React.ChangeEvent<HTMLTextAreaElement>;
+
+interface contentBoxProps {
+    textContent: string;
+    noteName: string;
+    onContentChange: (s: string)=>void;
+}
+
+function ContentBox({textContent, noteName, onContentChange}: contentBoxProps){
+    const onChange = (e: eType)=>{
+        onContentChange(e.currentTarget.value);
+    }
+
     return (
         <div className='content-box'>
             <div className='sessionbar-h'></div>
-
-            <textarea>컨텐츠</textarea>
+            <div className='content-box-note-name'>{noteName}</div>
+            <textarea value={textContent} onChange={onChange}></textarea>
             
         </div>
     );

@@ -11,6 +11,9 @@ function VerticalNavi({children}: verticalNaviProps){
         divRef.current!.classList.toggle('vertical-navi-hide');
         const btn = divRef.current!.querySelector('div[data-name=hide]');
         btn!.classList.toggle('turn-180');
+
+        const contBox: HTMLTextAreaElement | null = document.querySelector('div.content-box');
+        contBox!.classList.toggle('content-box-expand');
     }
 
     return (

@@ -2,18 +2,25 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 import {Button, SessionBar, VerticalNavi, NoteList, Pusher, NaviFooter, ContentBox} from '../components/CompLink';
 import {appContext} from '../App';
-import {noteListAttr} from '../util/interfaces';
+import {noteListAttr, contentBoxAttr} from '../util/interfaces';
 import UT from '../util/util';
 
-interface stateType {
+interface infoType {
     noteList: noteListAttr[];
+    contentInfo: contentBoxAttr;
     isNoteLabelEdit: boolean;
 }
 
+type eType = React.MouseEvent<HTMLDivElement> | MouseEvent;
+
 function Main({history}:RouteComponentProps){
     const context = useContext(appContext);
-    const [info, setInfo] = useState<stateType>({
+    const [info, setInfo] = useState<infoType>({
         noteList : [],
+        contentInfo : {
+            noteName : '',
+            nowContent : ''
+        },
         isNoteLabelEdit : false
     });    
 
@@ -38,6 +45,34 @@ function Main({history}:RouteComponentProps){
         });
     }
 
+    const onNoteSelected = (e: eType, contInfo: contentBoxAttr)=>{
+        const targ = e.currentTarget as HTMLDivElement;
+        const childs = Array.prototype.slice.call(targ.parentNode!.children);
+
+        childs.forEach(el =>{
+            el.classList.remove('noteLabel-selected');
+        });
+        targ.classList.add('noteLabel-selected');
+
+        setInfo({
+            ...info,
+            contentInfo : {
+                noteName : contInfo.noteName,
+                nowContent : contInfo.nowContent
+            }
+        });
+    }
+
+    const onContentChange = (cont: string)=>{
+        setInfo({
+            ...info,
+            contentInfo : {
+                ...info.contentInfo,
+                nowContent : cont
+            }
+        });
+    }
+
     useEffect(()=>{
         if(!localStorage.getItem('userId')){
             history.push('/welcome');
@@ -52,7 +87,11 @@ function Main({history}:RouteComponentProps){
         UT.request(param, (res)=>{
             setInfo({
                 ...info,
-                noteList : res.data
+                noteList : res.data,
+                contentInfo : {
+                    noteName : res.data[0] ? res.data[0].note_name : '',
+                    nowContent : res.data[0] ? res.data[0].txt_cont : ''
+                }
             })
         })
 
@@ -63,11 +102,11 @@ function Main({history}:RouteComponentProps){
             <SessionBar></SessionBar>
             <div style={{display : 'flex'}}>
                 <VerticalNavi>
-                    <NoteList noteList={info.noteList} onOrderChange={onOrderChange} editMode={info.isNoteLabelEdit}></NoteList>
+                    <NoteList noteList={info.noteList} onOrderChange={onOrderChange} onNoteSelected={onNoteSelected} editMode={info.isNoteLabelEdit}></NoteList>
                     <Pusher type='h'></Pusher>
                         <NaviFooter onEdit={onEdit}></NaviFooter>
                 </VerticalNavi>
-                <ContentBox></ContentBox>
+                <ContentBox textContent={info.contentInfo.nowContent} noteName={info.contentInfo.noteName} onContentChange={onContentChange}></ContentBox>
             </div>
         </div>
     );

@@ -56,3 +56,9 @@ export interface noteListAttr {
     reg_dt: string;
     mod_dt: string;
 }
+
+// 컨텐츠박스 정보
+export interface contentBoxAttr {
+    nowContent: string;
+    noteName: string;
+}
