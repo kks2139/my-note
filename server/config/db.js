@@ -39,8 +39,8 @@ const sqlMap = {
             mod_dt
         ) values (
             ?, ?, ?, ?, ?, ?,
-            date_format(now(), '%Y%m%d-%H%i%S'),
-            DATE_FORMAT(now(), '%Y%m%d-%H%i%S') 
+            date_format(now(), '%Y%m%d%H%i%S'),
+            DATE_FORMAT(now(), '%Y%m%d%H%i%S') 
         )
     `
 };

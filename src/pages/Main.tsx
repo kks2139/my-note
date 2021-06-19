@@ -46,22 +46,20 @@ function Main({history}:RouteComponentProps){
     }
 
     const onAdd = (noteName: string, color: string)=>{
-        const ord = info.noteList.length === 0 ? 1 : info.noteList.sort((a, b)=> b.ord - a.ord)[0].ord;
+        const ord = info.noteList.length === 0 ? 1 : info.noteList.sort((a, b)=> b.ord - a.ord)[0].ord + 1;
         const param = {
             url : 'insertNote',
             body : {
                 user_id : localStorage.getItem('userId'),
                 note_name : noteName,
-                txt_cont : '',
+                txt_cont : '새 노트',
                 ord,
                 color
             }
         };
         UT.request(param, (res)=>{
             const msg = res.errMsg || '노트가 추가되었습니다.';
-            UT.alert(msg); 
-
-            getNoteList();
+            UT.alert(msg, ()=> getNoteList()); 
         });
     }
 

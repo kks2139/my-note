@@ -15,7 +15,7 @@ const helper = {
         len = d[2].trim().length; 
         d[2] = len === 1 ? '0' + d[2].trim() : d[2].trim();
 
-        return std + d[0] + d[1] + d[2] + '-' + t[0] + t[1] + now.getSeconds() + '-' + UT.rand(100);
+        return std + d[0] + d[1] + d[2] + '-' + t[0] + t[1] + now.getSeconds() + '-' + helper.rand(100);
     },
     rand : n => {
         if(isNaN(n)) return 0;
