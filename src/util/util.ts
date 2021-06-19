@@ -116,7 +116,6 @@ const UT = {
     showLoading : (show: boolean): void=>{
         const modalRoot = document.querySelector('#modal');
         if(show && modalRoot!.querySelector('div.modal')) return undefined;
-
         
         if(show){
             // const text = 'Loading...';

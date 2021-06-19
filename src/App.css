@@ -88,7 +88,7 @@ input {
   text-align: center;
 }
 .not-found > div {
-  background-color: var(--theme-dark-2);
+  background-color: var(--theme-dark-1);
   box-shadow: 0 0 15px -3px black;
   padding: 50px 0;
 }

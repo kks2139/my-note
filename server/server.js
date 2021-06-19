@@ -50,3 +50,12 @@ app.post('/api/getNoteList', async (req, res)=>{
         errMsg : error ? errorText : ''
     });
 });
+
+app.post('/api/insertNote', async (req, res)=>{
+    req.body.note_id = helper.uuid('NT');
+    const {rows, error} = await doQuery('insertNote', req.body);
+    res.send({
+        data : rows,
+        errMsg : error ? errorText : ''
+    });
+});

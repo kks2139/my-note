@@ -26,6 +26,22 @@ const sqlMap = {
           from note
          where user_id = ? 
       order by ord asc
+    `,
+    insertNote : `
+        insert into note(
+            user_id,
+            note_id,
+            note_name,
+            txt_cont,
+            ord,
+            color,
+            reg_dt,
+            mod_dt
+        ) values (
+            ?, ?, ?, ?, ?, ?,
+            date_format(now(), '%Y%m%d-%H%i%S'),
+            DATE_FORMAT(now(), '%Y%m%d-%H%i%S') 
+        )
     `
 };
 
@@ -40,6 +56,9 @@ const doQuery = async (sqlId, p)=>{
             case 'insertUser': params = [p.id, p.pw];
                 break;
             case 'getNoteList': params = [p.user_id];
+                break;
+            case 'insertNote': params = [p.user_id, p.note_id, p.note_name,
+                                         p.txt_cont, p.ord, p.color];
                 break;
         }
         

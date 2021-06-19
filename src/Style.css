@@ -192,7 +192,7 @@
     transition: background-color .2s, font-size .2s, top .1s, left .1s, border .2s;
 }
 .noteLabel-box:hover {
-    border-left-width: 15px !important;
+    border-left-width: 10px !important;
     background-color: rgb(129, 129, 129);
     cursor: pointer;
     font-size: 17px;
@@ -203,11 +203,28 @@
     /* transform: scale(0.9); */
     transition: none;
 }
-.noteLabel-box > input {
-    border-radius: var(--radius);
+.noteLabel-box .note-name {
+    display: flex;
+    justify-content: space-between;
 }
-.noteLabel-edit {
-    /* animation: var(--ani-shaking); */
+.noteLabel-box img {
+    height: 15px;
+    margin: 6px 3px 0 0;
+    padding: 3px;
+    border-radius: var(--radius);
+    transition: box-shadow .2s;
+}
+.noteLabel-box img:hover {
+    /* box-shadow: 0 0 1px 2px white; */
+}
+.noteLabel-box .note-name-edit {
+    display: flex;
+    justify-content: space-between;
+}
+.noteLabel-box input {
+    border-radius: var(--radius);
+    width: calc(100% - 5px);
+    height: 30px;
 }
 .noteLabel-selected {
     box-shadow: 0 0 3px 1px var(--theme-color-2);

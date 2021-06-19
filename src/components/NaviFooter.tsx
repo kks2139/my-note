@@ -4,13 +4,14 @@ import {Input, Button} from './CompLink';
 
 interface naviFooterProps {
     onEdit: (val: boolean)=>void;
+    onAdd: (s1: string, s2: string)=>void;
 }
 
-function NaviFooter({onEdit}: naviFooterProps){
+function NaviFooter({onEdit, onAdd}: naviFooterProps){
     const [noteName, setNoteName] = useState('');
+    const [invalid, setInvalid] = useState(false);
     const isEdit = useRef(false);
     const isAdd = useRef(false);
-    const [invalid, setInvalid] = useState(false);
     const inputBoxRef = useRef<HTMLDivElement | null>(null);
 
     const onClickAddNote = (e: React.MouseEvent<HTMLDivElement>)=>{
@@ -23,18 +24,13 @@ function NaviFooter({onEdit}: naviFooterProps){
         setInvalid(false);
     }
     
-    const onAddNote = (e: React.MouseEvent<HTMLDivElement>)=>{
-        const targ = e.currentTarget;
+    const onAddNote = ()=>{
         if(validation('add')){
-
-
-            // 추가노트 디비저장 --> 재조회
-
-
+            UT.confirm('노트를 추가 하시겠습니까?', ()=>{
+                onAdd(noteName, UT.randomColor());
+            });
         }else return;
-
         setInvalid(false);
-        inputBoxRef.current!.classList.remove('footer-input-hide');
     }
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>)=>{

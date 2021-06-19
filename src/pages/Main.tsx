@@ -45,6 +45,26 @@ function Main({history}:RouteComponentProps){
         });
     }
 
+    const onAdd = (noteName: string, color: string)=>{
+        const ord = info.noteList.length === 0 ? 1 : info.noteList.sort((a, b)=> b.ord - a.ord)[0].ord;
+        const param = {
+            url : 'insertNote',
+            body : {
+                user_id : localStorage.getItem('userId'),
+                note_name : noteName,
+                txt_cont : '',
+                ord,
+                color
+            }
+        };
+        UT.request(param, (res)=>{
+            const msg = res.errMsg || '노트가 추가되었습니다.';
+            UT.alert(msg); 
+
+            getNoteList();
+        });
+    }
+
     const onNoteSelected = (e: eType, contInfo: contentBoxAttr)=>{
         const targ = e.currentTarget as HTMLDivElement;
         const childs = Array.prototype.slice.call(targ.parentNode!.children);
@@ -73,11 +93,7 @@ function Main({history}:RouteComponentProps){
         });
     }
 
-    useEffect(()=>{
-        if(!localStorage.getItem('userId')){
-            history.push('/welcome');
-        }
-
+    const getNoteList = ()=>{
         const param = {
             url : 'getNoteList',
             body : {
@@ -93,8 +109,14 @@ function Main({history}:RouteComponentProps){
                     nowContent : res.data[0] ? res.data[0].txt_cont : ''
                 }
             })
-        })
+        });
+    }
 
+    useEffect(()=>{
+        if(!localStorage.getItem('userId')){
+            history.push('/welcome');
+        }
+        getNoteList();
     }, []);
 
     return (
@@ -104,7 +126,7 @@ function Main({history}:RouteComponentProps){
                 <VerticalNavi>
                     <NoteList noteList={info.noteList} onOrderChange={onOrderChange} onNoteSelected={onNoteSelected} editMode={info.isNoteLabelEdit}></NoteList>
                     <Pusher type='h'></Pusher>
-                        <NaviFooter onEdit={onEdit}></NaviFooter>
+                    <NaviFooter onEdit={onEdit} onAdd={onAdd}></NaviFooter>
                 </VerticalNavi>
                 <ContentBox textContent={info.contentInfo.nowContent} noteName={info.contentInfo.noteName} onContentChange={onContentChange}></ContentBox>
             </div>
