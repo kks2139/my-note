@@ -15,9 +15,11 @@ type eType = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
 function Main({history}:RouteComponentProps){
     const context = useContext(appContext);
+    const cntRef = useRef(0);
     const [info, setInfo] = useState<infoType>({
         noteList : [],
         contentInfo : {
+            noteId : '',
             noteName : '',
             nowContent : ''
         },
@@ -63,8 +65,24 @@ function Main({history}:RouteComponentProps){
         });
     }
 
-    const onNoteSelected = (e: eType, contInfo: contentBoxAttr)=>{
-        const targ = e.currentTarget as HTMLDivElement;
+    const onDeleteNote = (noteId: string)=>{
+        UT.confirm('노트를 삭제 하시겠습니까?', ()=>{
+            const param = {
+                url : 'deleteNote',
+                body : {
+                    note_id : noteId,
+                    user_id : localStorage.getItem('userId')
+                }
+            };
+            UT.request(param, (res)=>{
+                if(!res.errMsg) {
+                    UT.alert('처리되었습니다.', ()=> getNoteList());
+                }
+            });
+        });
+    }
+
+    const onNoteSelected = (targ: HTMLDivElement)=>{
         const childs = Array.prototype.slice.call(targ.parentNode!.children);
 
         childs.forEach(el =>{
@@ -72,23 +90,32 @@ function Main({history}:RouteComponentProps){
         });
         targ.classList.add('noteLabel-selected');
 
-        setInfo({
-            ...info,
-            contentInfo : {
-                noteName : contInfo.noteName,
-                nowContent : contInfo.nowContent
-            }
-        });
+        const {id, name} = targ.dataset;
+        getTextContent(id!, name!);
     }
 
-    const onContentChange = (cont: string)=>{
+    const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
         setInfo({
             ...info,
             contentInfo : {
                 ...info.contentInfo,
-                nowContent : cont
+                nowContent : e.currentTarget.value
             }
         });
+
+        if(cntRef.current > 3) {
+            const param = {
+                url : 'saveTextContent',
+                body : {
+                    note_id : e.currentTarget.dataset.id,
+                    user_id : localStorage.getItem('userId'),
+                    txt_cont : e.currentTarget.value 
+                },
+                showLoad : false
+            };
+            UT.request(param);
+            cntRef.current = 0;
+        }else cntRef.current++;
     }
 
     const getNoteList = ()=>{
@@ -102,11 +129,27 @@ function Main({history}:RouteComponentProps){
             setInfo({
                 ...info,
                 noteList : res.data,
-                contentInfo : {
-                    noteName : res.data[0] ? res.data[0].note_name : '',
-                    nowContent : res.data[0] ? res.data[0].txt_cont : ''
-                }
             })
+        });
+    }
+    
+    const getTextContent = (noteId: string, noteName: string)=>{
+        const param = {
+            url : 'getTextContent',
+            body : {
+                user_id : localStorage.getItem('userId'),
+                note_id : noteId
+            }
+        }
+        UT.request(param, (res)=>{
+            setInfo({
+                ...info,
+                contentInfo : {
+                    nowContent : res.data[0].txt_cont || '',
+                    noteId,
+                    noteName
+                }
+            });
         });
     }
 
@@ -122,11 +165,11 @@ function Main({history}:RouteComponentProps){
             <SessionBar></SessionBar>
             <div style={{display : 'flex'}}>
                 <VerticalNavi>
-                    <NoteList noteList={info.noteList} onOrderChange={onOrderChange} onNoteSelected={onNoteSelected} editMode={info.isNoteLabelEdit}></NoteList>
+                    <NoteList noteList={info.noteList} onOrderChange={onOrderChange} onNoteSelected={onNoteSelected} onDeleteNote={onDeleteNote} editMode={info.isNoteLabelEdit}></NoteList>
                     <Pusher type='h'></Pusher>
                     <NaviFooter onEdit={onEdit} onAdd={onAdd}></NaviFooter>
                 </VerticalNavi>
-                <ContentBox textContent={info.contentInfo.nowContent} noteName={info.contentInfo.noteName} onContentChange={onContentChange}></ContentBox>
+                <ContentBox textContent={info.contentInfo.nowContent} noteId={info.contentInfo.noteId} noteName={info.contentInfo.noteName} onContentChange={onContentChange}></ContentBox>
             </div>
         </div>
     );

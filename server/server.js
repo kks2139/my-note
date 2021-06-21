@@ -59,3 +59,29 @@ app.post('/api/insertNote', async (req, res)=>{
         errMsg : error ? errorText : ''
     });
 });
+
+app.post('/api/deleteNote', async (req, res)=>{
+    const {rows, error} = await doQuery('deleteNote', req.body);
+    res.send({
+        data : rows,
+        errMsg : error ? errorText : ''
+    });
+});
+
+app.post('/api/getTextContent', async (req, res)=>{
+    const {rows, error} = await doQuery('getTextContent', req.body);
+    res.send({
+        data : rows,
+        errMsg : error ? errorText : ''
+    });
+});
+
+app.post('/api/saveTextContent', async (req, res)=>{
+    const {rows, error} = await doQuery('saveTextContent', req.body);
+    res.send({
+        data : rows,
+        errMsg : error ? errorText : ''
+    });
+});
+
+

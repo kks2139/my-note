@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {noteListAttr, contentBoxAttr} from '../util/interfaces';
+import UT from '../util/util';
 import {Input} from './CompLink';
 
 type eType = React.MouseEvent<HTMLDivElement>;
@@ -8,10 +9,11 @@ interface noteLabelProps extends noteListAttr {
     edit: boolean;
     onDown: (e: eType)=>void;
     onUp: (e: eType)=>void;
-    onClickNote: (e: eType, obj: contentBoxAttr)=>void;
+    onClickNote: (el: HTMLDivElement)=>void;
+    onClickDelete: (val: string)=>void;
 }
 
-function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown, onUp, onClickNote}: noteLabelProps){
+function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown, onUp, onClickNote, onClickDelete}: noteLabelProps){
     const [label, setLabel] = useState(note_name);
     const [showInput, setShowInput] = useState(false);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -28,16 +30,17 @@ function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown
         setLabel(e.currentTarget.value);
     }
 
-    const onClick = (e: eType)=>{
-        onClickNote(e, {
-            nowContent : txt_cont,
-            noteName : note_name
-        });
+    const onClick = ()=>{
+        onClickNote(divRef.current!);
     }
 
     const onImgClick = ()=>{
         setShowInput(!showInput);
         setLabel(note_name);
+    }
+
+    const onDelImgClick = ()=>{
+        onClickDelete(divRef.current!.dataset.id!);
     }
 
     useEffect(()=>{
@@ -50,7 +53,7 @@ function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown
     }, [edit]);
 
     return (
-        <div className='noteLabel-box' ref={divRef} data-id={note_id} data-ord={ord} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+        <div className='noteLabel-box' ref={divRef} data-id={note_id} data-name={note_name} data-ord={ord} onClick={onClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
             {showInput ? 
             <div className='note-name-edit'>
                 <Input text={label} onChange={onChange}></Input>
@@ -58,7 +61,12 @@ function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown
             </div> :
             <div className='note-name'>
                 <span>{note_name}</span>
-                {edit ? <img src='/pencil_6.png' onClick={onImgClick}></img> : null}
+                {edit ? 
+                    <div>
+                        <img src='/pencil_6.png' onClick={onImgClick}></img> 
+                        <img src='/delete_2.png' onClick={onDelImgClick}></img>
+                    </div> 
+                : null}
             </div>}
         </div>
     );

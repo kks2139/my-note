@@ -8,7 +8,7 @@ interface optionAttr {
 }
 
 const UT = {
-    request : async ({method='POST', url='', body={}}: requestParam, callback?: (obj: resultAttr<any>)=> void)=>{
+    request : async ({method='POST', url='', body={}, showLoad=true}: requestParam, callback?: (obj: resultAttr<any>)=> void)=>{
         const option: optionAttr = {
             method: method,
             credentials: "same-origin",
@@ -19,7 +19,7 @@ const UT = {
         }
         if(method.toLowerCase() === 'post') option.body = JSON.stringify(body);
         try{
-            UT.showLoading(true);
+            UT.showLoading(showLoad);
             const res = await fetch('/api/' + url, option);
             if(res.status === 200){
                 UT.showLoading(false);

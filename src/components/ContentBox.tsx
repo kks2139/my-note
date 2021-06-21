@@ -5,19 +5,20 @@ type eType = React.ChangeEvent<HTMLTextAreaElement>;
 interface contentBoxProps {
     textContent: string;
     noteName: string;
-    onContentChange: (s: string)=>void;
+    noteId: string;
+    onContentChange: (e: eType)=>void;
 }
 
-function ContentBox({textContent, noteName, onContentChange}: contentBoxProps){
+function ContentBox({textContent, noteName, noteId, onContentChange}: contentBoxProps){
     const onChange = (e: eType)=>{
-        onContentChange(e.currentTarget.value);
+        onContentChange(e);
     }
 
     return (
         <div className='content-box'>
             <div className='sessionbar-h'></div>
             <div className='content-box-note-name'>{noteName}</div>
-            <textarea value={textContent} onChange={onChange}></textarea>
+            <textarea value={textContent} data-id={noteId} onChange={onChange}></textarea>
             
         </div>
     );

@@ -37,6 +37,7 @@ export interface requestParam {
     method?: string;
     url: string;
     body?: object;
+    showLoad?: boolean;
 }
 
 // 응답값
@@ -61,4 +62,5 @@ export interface noteListAttr {
 export interface contentBoxAttr {
     nowContent: string;
     noteName: string;
+    noteId: string;
 }
