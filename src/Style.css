@@ -160,7 +160,7 @@
     /* font-weight: bold; */
     font-size: 25px;
     text-align: center;
-    background-color: rgb(138, 138, 138);
+    background-color: var(--theme-color-2);
     box-shadow: 7px 3px 10px -7px black;
     border-top-right-radius: var(--radius);
     border-bottom-right-radius: var(--radius);

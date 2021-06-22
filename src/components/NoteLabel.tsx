@@ -45,6 +45,8 @@ function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown
 
     useEffect(()=>{
         divRef.current!.style.borderLeft = `7px solid ${color}`;
+
+        if(ord === 1) onClick();
     }, []);
 
     useEffect(()=>{

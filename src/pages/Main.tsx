@@ -90,26 +90,28 @@ function Main({history}:RouteComponentProps){
         });
         targ.classList.add('noteLabel-selected');
 
-        const {id, name} = targ.dataset;
-        getTextContent(id!, name!);
+        if(!targ.classList.contains('noteLabel-edit')){
+            const {id, name} = targ.dataset;
+            getTextContent(id!, name!);
+        }
     }
 
-    const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+    const onContentChange = (targ: HTMLTextAreaElement)=>{
         setInfo({
             ...info,
             contentInfo : {
                 ...info.contentInfo,
-                nowContent : e.currentTarget.value
+                nowContent : targ.value
             }
         });
 
-        if(cntRef.current > 3) {
+        if(cntRef.current > 0) {
             const param = {
                 url : 'saveTextContent',
                 body : {
-                    note_id : e.currentTarget.dataset.id,
+                    note_id : targ.dataset.id,
                     user_id : localStorage.getItem('userId'),
-                    txt_cont : e.currentTarget.value 
+                    txt_cont : targ.value 
                 },
                 showLoad : false
             };

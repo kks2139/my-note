@@ -98,11 +98,6 @@ function NoteList({noteList, onOrderChange, onNoteSelected, onDeleteNote, editMo
     }
 
     useEffect(()=>{
-        const firstChild = divRef.current!.firstChild as HTMLDivElement;
-        if(firstChild){
-            onNoteSelected(firstChild);
-        }
-        
         document.body.onmousemove = onMouseMove;
         return ()=>{
             document.body.onmousemove = null;
