@@ -84,4 +84,34 @@ app.post('/api/saveTextContent', async (req, res)=>{
     });
 });
 
+app.post('/api/updateNoteName', async (req, res)=>{
+    const {rows, error} = await doQuery('updateNoteName', req.body);
+    res.send({
+        data : rows,
+        errMsg : error ? errorText : ''
+    });
+});
+
+app.post('/api/updateNoteOrder', async (req, res)=>{
+    try{
+        await helper.doBatch(()=>{
+            let notes = req.body.list;
+            for(let i=0; i<notes.length; i++){
+                doQuery('updateNoteOrder', notes[i]);
+            }
+        });
+        res.send({
+            data : [],
+            errMsg : ''
+        });
+    }catch(ex){
+        console.log(ex);
+        res.send({
+            data : [],
+            errMsg : ex
+        });
+    }
+});
+
+
 

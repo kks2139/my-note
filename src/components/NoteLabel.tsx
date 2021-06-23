@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {noteListAttr, contentBoxAttr} from '../util/interfaces';
+import {noteListAttr, editParam} from '../util/interfaces';
 import UT from '../util/util';
 import {Input} from './CompLink';
 
@@ -9,11 +9,12 @@ interface noteLabelProps extends noteListAttr {
     edit: boolean;
     onDown: (e: eType)=>void;
     onUp: (e: eType)=>void;
+    editNoteName: (p : editParam)=>void;
     onClickNote: (el: HTMLDivElement)=>void;
     onClickDelete: (val: string)=>void;
 }
 
-function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown, onUp, onClickNote, onClickDelete}: noteLabelProps){
+function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown, onUp, editNoteName, onClickNote, onClickDelete}: noteLabelProps){
     const [label, setLabel] = useState(note_name);
     const [showInput, setShowInput] = useState(false);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -34,7 +35,13 @@ function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown
         onClickNote(divRef.current!);
     }
 
-    const onImgClick = ()=>{
+    const onImgClick = (e: React.MouseEvent<HTMLImageElement>)=>{
+        if(e.currentTarget.id === 'ok'){
+            editNoteName({
+                noteName : label,
+                noteId : divRef.current!.dataset.id!
+            });
+        }
         setShowInput(!showInput);
         setLabel(note_name);
     }
@@ -60,6 +67,7 @@ function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown
             <div className='note-name-edit'>
                 <Input text={label} onChange={onChange}></Input>
                 <img src='/x_1.png' onClick={onImgClick}></img>
+                <img src='/check.png' id='ok' onClick={onImgClick}></img>
             </div> :
             <div className='note-name'>
                 <span>{note_name}</span>

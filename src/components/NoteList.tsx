@@ -1,18 +1,19 @@
 import React, {useEffect, useRef} from 'react';
 import {NoteLabel} from './CompLink';
-import {noteListAttr, contentBoxAttr} from '../util/interfaces';
+import {noteListAttr, editParam} from '../util/interfaces';
 
 interface noteListProps {
     noteList: noteListAttr[];
     onOrderChange: (val1: string, val2: string)=>void;
     onNoteSelected: (el: HTMLDivElement)=>void;
     onDeleteNote: (val: string)=>void;
+    editNoteName: (p: editParam)=>void;
     editMode: boolean;
 }
 
 type eType = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
-function NoteList({noteList, onOrderChange, onNoteSelected, onDeleteNote, editMode}: noteListProps){
+function NoteList({noteList, onOrderChange, onNoteSelected, onDeleteNote, editNoteName, editMode}: noteListProps){
     const divRef = useRef<HTMLDivElement | null>(null);
     const prePos = useRef({x : 0, y : 0});
     
@@ -106,7 +107,7 @@ function NoteList({noteList, onOrderChange, onNoteSelected, onDeleteNote, editMo
 
     return (
         <div className='noteList-box' ref={divRef}>
-            {noteList.map(note => <NoteLabel key={note.note_id} {...note} edit={editMode} onClickDelete={onDeleteNote} onDown={onMouseDown} onUp={onMouseUp} onClickNote={onClickNote}></NoteLabel>)}
+            {noteList.map(note => <NoteLabel key={note.note_id} {...note} edit={editMode} editNoteName={editNoteName} onClickDelete={onDeleteNote} onDown={onMouseDown} onUp={onMouseUp} onClickNote={onClickNote}></NoteLabel>)}
         </div>
     );
 }

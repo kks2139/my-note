@@ -35,6 +35,13 @@ const helper = {
         }else{
             next();
         }
+    },
+    doBatch : async (func)=>{
+        if(func && typeof func === 'function'){
+            func();
+        }else{
+            throw new Error('not function');
+        }
     }
 }
 

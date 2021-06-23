@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 import {Button, SessionBar, VerticalNavi, NoteList, Pusher, NaviFooter, ContentBox} from '../components/CompLink';
 import {appContext} from '../App';
-import {noteListAttr, contentBoxAttr} from '../util/interfaces';
+import {noteListAttr, contentBoxAttr, editParam} from '../util/interfaces';
 import UT from '../util/util';
 
 interface infoType {
@@ -41,8 +41,19 @@ function Main({history}:RouteComponentProps){
     }
 
     const onEdit = (val: boolean)=>{
+        info.noteList.forEach((n, i)=> n.ord = i + 1);
+        if(!val){ // 편집완료   
+            const param = {
+                url : 'updateNoteOrder',
+                body : {
+                    list : info.noteList
+                }
+            };
+            UT.request(param);
+        }
         setInfo({
             ...info,
+            noteList : info.noteList.slice(),
             isNoteLabelEdit : val
         });
     }
@@ -94,6 +105,26 @@ function Main({history}:RouteComponentProps){
             const {id, name} = targ.dataset;
             getTextContent(id!, name!);
         }
+    }
+
+    const editNoteName = (p: editParam)=>{
+        const param = {
+            url : 'updateNoteName',
+            body : {
+                user_id : localStorage.getItem('userId'),
+                note_id : p.noteId,
+                note_name : p.noteName
+            }
+        };
+        UT.request(param);
+
+        const idx = info.noteList.findIndex(d => d.note_id === p.noteId);
+        info.noteList[idx].note_name = p.noteName;
+
+        setInfo({
+            ...info,
+            noteList : info.noteList
+        });
     }
 
     const onContentChange = (targ: HTMLTextAreaElement)=>{
@@ -167,7 +198,7 @@ function Main({history}:RouteComponentProps){
             <SessionBar></SessionBar>
             <div style={{display : 'flex'}}>
                 <VerticalNavi>
-                    <NoteList noteList={info.noteList} onOrderChange={onOrderChange} onNoteSelected={onNoteSelected} onDeleteNote={onDeleteNote} editMode={info.isNoteLabelEdit}></NoteList>
+                    <NoteList noteList={info.noteList} onOrderChange={onOrderChange} editNoteName={editNoteName} onNoteSelected={onNoteSelected} onDeleteNote={onDeleteNote} editMode={info.isNoteLabelEdit}></NoteList>
                     <Pusher type='h'></Pusher>
                     <NaviFooter onEdit={onEdit} onAdd={onAdd}></NaviFooter>
                 </VerticalNavi>

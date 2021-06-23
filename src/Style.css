@@ -230,7 +230,7 @@
     box-shadow: 0 0 3px 1px var(--theme-color-2);
 }
 .noteLabel-edit {
-    animation: var(--ani-shaking);
+    /* animation: var(--ani-shaking); */
 }
 .covered {
     background-color: white;

@@ -63,6 +63,18 @@ const sqlMap = {
     saveTextContent : `
         update note
            set txt_cont = ?
+           where user_id = ?
+           and note_id = ?
+    `,
+    updateNoteName : `
+        update note
+           set note_name = ?
+         where user_id = ?
+           and note_id = ?
+    `,
+    updateNoteOrder : `
+        update note
+           set ord = ?
          where user_id = ?
            and note_id = ?
     `
@@ -88,6 +100,10 @@ const doQuery = async (sqlId, p)=>{
             case 'getTextContent': params = [p.user_id, p.note_id];
                 break;
             case 'saveTextContent': params = [p.txt_cont, p.user_id, p.note_id];
+                break;
+            case 'updateNoteName': params = [p.note_name, p.user_id, p.note_id];
+                break;
+            case 'updateNoteOrder': params = [p.ord, p.user_id, p.note_id];
                 break;
         }
         

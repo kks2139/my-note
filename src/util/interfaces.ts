@@ -64,3 +64,9 @@ export interface contentBoxAttr {
     noteName: string;
     noteId: string;
 }
+
+// 노트이름 수정 파라미터
+export interface editParam {
+    noteName: string;
+    noteId: string;
+}
