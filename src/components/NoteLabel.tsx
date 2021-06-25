@@ -36,6 +36,7 @@ function NoteLabel({note_id, note_name, ord, color, txt_cont, edit=false, onDown
     }
 
     const onImgClick = (e: React.MouseEvent<HTMLImageElement>)=>{
+        e.stopPropagation();
         if(e.currentTarget.id === 'ok'){
             editNoteName({
                 noteName : label,

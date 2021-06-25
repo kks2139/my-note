@@ -320,6 +320,8 @@
     background-color: rgb(70, 70, 70);
     color: white;
     padding: 10px;
+    font-weight: bold;
+    font-size: 14px;
     transition: width .3s;
 }
 .content-box-expand {
@@ -327,4 +329,8 @@
 }
 .content-box-expand > textarea {
     width : calc(100vw - 60px);
+}
+
+.history-popup {
+    
 }

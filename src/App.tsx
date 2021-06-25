@@ -7,19 +7,19 @@ import './App.css';
 import './Style.css';
 
 interface userInfo {
-
+  user_id: string;
 }
 
 interface contextProps {
   onLoginSuccess: (id: string)=>void; 
   onLogout: ()=> void;
-  userInfo: userInfo | null;
+  userInfo: userInfo;
 }
 
 export const appContext = React.createContext<contextProps | null>(null);
 
 function App({history}: RouteComponentProps) {
-  const [userInfo, setUserInfo] = useState<userInfo | null>({});
+  const [userInfo, setUserInfo] = useState<userInfo>({user_id : ''});
 
   const onLoginSuccess = (id: string)=>{
     localStorage.setItem('userId', id);

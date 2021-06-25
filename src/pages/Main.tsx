@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 import {Button, SessionBar, VerticalNavi, NoteList, Pusher, NaviFooter, ContentBox} from '../components/CompLink';
-import {appContext} from '../App';
 import {noteListAttr, contentBoxAttr, editParam} from '../util/interfaces';
+import {appContext} from '../App';
+import HistoryPopup from './popup/HistoryPopup';
 import UT from '../util/util';
 
 interface infoType {
     noteList: noteListAttr[];
     contentInfo: contentBoxAttr;
     isNoteLabelEdit: boolean;
+    showHistory: boolean;
+    showUserInfo: boolean;
 }
 
 type eType = React.MouseEvent<HTMLDivElement> | MouseEvent;
@@ -23,7 +26,9 @@ function Main({history}:RouteComponentProps){
             noteName : '',
             nowContent : ''
         },
-        isNoteLabelEdit : false
+        isNoteLabelEdit : false,
+        showHistory : false,
+        showUserInfo : false
     });    
 
     const onOrderChange = (selected: string, covered: string)=>{
@@ -71,8 +76,7 @@ function Main({history}:RouteComponentProps){
             }
         };
         UT.request(param, (res)=>{
-            const msg = res.errMsg || '노트가 추가되었습니다.';
-            UT.alert(msg, ()=> getNoteList()); 
+            getNoteList()
         });
     }
 
@@ -102,9 +106,10 @@ function Main({history}:RouteComponentProps){
         targ.classList.add('noteLabel-selected');
 
         if(!targ.classList.contains('noteLabel-edit')){
-            const {id, name} = targ.dataset;
-            getTextContent(id!, name!);
+            
         }
+        const {id, name} = targ.dataset;
+        getTextContent(id!, name!);
     }
 
     const editNoteName = (p: editParam)=>{
@@ -186,6 +191,20 @@ function Main({history}:RouteComponentProps){
         });
     }
 
+    const onClickInfo = (type: string)=>{
+        if(type === 'history'){
+            setInfo({
+                ...info,
+                showHistory : true
+            });
+        }else{
+            setInfo({
+                ...info,
+                showUserInfo : true
+            });
+        }
+    }
+
     useEffect(()=>{
         if(!localStorage.getItem('userId')){
             history.push('/welcome');
@@ -195,7 +214,7 @@ function Main({history}:RouteComponentProps){
 
     return (
         <div id='mainPage' className='main-box'>
-            <SessionBar></SessionBar>
+            <SessionBar onClickInfo={onClickInfo}></SessionBar>
             <div style={{display : 'flex'}}>
                 <VerticalNavi>
                     <NoteList noteList={info.noteList} onOrderChange={onOrderChange} editNoteName={editNoteName} onNoteSelected={onNoteSelected} onDeleteNote={onDeleteNote} editMode={info.isNoteLabelEdit}></NoteList>
@@ -204,6 +223,7 @@ function Main({history}:RouteComponentProps){
                 </VerticalNavi>
                 <ContentBox textContent={info.contentInfo.nowContent} noteId={info.contentInfo.noteId} noteName={info.contentInfo.noteName} onContentChange={onContentChange}></ContentBox>
             </div>
+            {info.showHistory ? <HistoryPopup></HistoryPopup> : null}
         </div>
     );
 }

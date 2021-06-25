@@ -4,7 +4,7 @@ import {appContext} from '../App';
 import UT from '../util/util';
 
 interface sessionBarProps {
-
+    onClickInfo: (s: string)=>void;
 }
 
 interface infoItems {
@@ -12,7 +12,7 @@ interface infoItems {
     label: string;
 }
 
-function SessionBar({}: sessionBarProps){
+function SessionBar({onClickInfo}: sessionBarProps){
     const items: infoItems[] = [{data : 'd1', label : '수정이력'}, 
                                 {data : 'd2', label : '사용자 정보'}];
     const context = useContext(appContext);
@@ -23,9 +23,12 @@ function SessionBar({}: sessionBarProps){
         });
     }
 
-    const onInfoClick = (sel: infoItems): void=>{
+    const onSelect = (sel: infoItems): void=>{
         // 콤보 리스트 - 1.사용자정보 2.수정이력
         UT.toastMsg(sel.label);
+
+        const type = sel.data === 'd1' ? 'history' : 'userInfo';
+        onClickInfo(type);
     }
     
     return (
@@ -39,7 +42,7 @@ function SessionBar({}: sessionBarProps){
                 {/* <div className='timer'>{timer}</div> */}
                 <Clock></Clock>
                 <Button text='로그아웃' onClick={onLogoutClick}></Button>
-                <DropDownList type='button' text='정보' items={items} onSelect={onInfoClick}></DropDownList>
+                <DropDownList type='button' text='정보' items={items} onSelect={onSelect}></DropDownList>
             </div>
         </div>
     );
