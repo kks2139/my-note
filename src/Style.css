@@ -332,5 +332,50 @@
 }
 
 .history-popup {
-    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    border-radius: var(--radius);
+    background-color: white;
+    color: black;
+    box-shadow: 0 10px 20px 0 black;
+}
+.history-popup-title {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 15px;
+    font-weight: bold;
+}
+.history-popup-title > span {
+    line-height: 30px;
+}
+.history-popup-title > div {
+    font-size: 20px;
+    width: 25px;
+    text-align: center;
+    border-radius: var(--radius);
+}
+.history-popup-list table {
+    width: 100%;
+}
+.history-popup-list th {
+    background-color: rgb(227, 242, 255);
+    height: 35px;
+    transition: background-color .2s;
+}
+.history-popup-list th:hover {cursor: pointer; background-color: rgb(174, 217, 255);}
+.history-popup-list tr:hover {background-color: rgb(210, 234, 255);}
+.history-popup-list colgroup > col:nth-child(1) {width: 30%;}
+.history-popup-list colgroup > col:nth-child(2) {width: 40%;}
+.history-popup-list colgroup > col:nth-child(3) {width: 30%;}
+.history-popup-list td {text-align: center;}
+
+.hover-effect:hover {
+    cursor: pointer;
+    transform: translateY(-4px);
+    text-shadow: 0 2px 2px black;
+    transition: transform .2s, text-shadow .2s;
 }

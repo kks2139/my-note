@@ -99,15 +99,11 @@ function Main({history}:RouteComponentProps){
 
     const onNoteSelected = (targ: HTMLDivElement)=>{
         const childs = Array.prototype.slice.call(targ.parentNode!.children);
-
         childs.forEach(el =>{
             el.classList.remove('noteLabel-selected');
         });
         targ.classList.add('noteLabel-selected');
 
-        if(!targ.classList.contains('noteLabel-edit')){
-            
-        }
         const {id, name} = targ.dataset;
         getTextContent(id!, name!);
     }
@@ -205,6 +201,13 @@ function Main({history}:RouteComponentProps){
         }
     }
 
+    const onClickCloseHistory = ()=>{
+        setInfo({
+            ...info,
+            showHistory : false
+        });
+    }
+
     useEffect(()=>{
         if(!localStorage.getItem('userId')){
             history.push('/welcome');
@@ -223,7 +226,7 @@ function Main({history}:RouteComponentProps){
                 </VerticalNavi>
                 <ContentBox textContent={info.contentInfo.nowContent} noteId={info.contentInfo.noteId} noteName={info.contentInfo.noteName} onContentChange={onContentChange}></ContentBox>
             </div>
-            {info.showHistory ? <HistoryPopup></HistoryPopup> : null}
+            {info.showHistory ? <HistoryPopup showPopup={info.showHistory} onCloseHistoryPopup={onClickCloseHistory}></HistoryPopup> : null}
         </div>
     );
 }

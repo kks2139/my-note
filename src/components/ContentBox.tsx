@@ -15,20 +15,6 @@ function ContentBox({textContent, noteName, noteId, onContentChange}: contentBox
     const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>)=>{
         if(e.key === 'Tab'){
             e.preventDefault(); // 브라우저 다른 요소로 포커스 이동 차단
-            const targ = e.currentTarget;
-            const [st, ed, txt] = [targ.selectionStart, targ.selectionEnd, targ.value];
-            const range = txt.substring(st, ed);
-
-            if(range.indexOf('\n') > -1){ // 여러행 선택
-                targ.value = range.split('\n').join('\n#');
-                onContentChange(targ);
-            }else{
-                const [front, back] = [txt.substring(0, st), txt.substring(st)];
-                targ.value = front + '    ' + back;
-                targ.selectionStart = st + 4;
-                targ.selectionEnd = ed + 4;
-                onContentChange(targ);
-            }
         }
     }
 
