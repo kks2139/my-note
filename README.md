@@ -15,7 +15,7 @@
     - 404 Not Found
 
 
-### 기술 스택
+### 개발 환경
 1. Server : ExpressJS / AWS RDS / MySQL
 2. Client : React Hooks / Typescript / Javascript / HTML / CSS 
 
