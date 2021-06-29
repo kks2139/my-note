@@ -1,5 +1,5 @@
 # my-note - Making my own notes
-자유롭게 메모하고 저장할 수 있는 SPA 구현 (In progress..)
+자유롭게 메모하고 저장할 수 있는 SPA 구현 (In progress...)
 
 ***
 
@@ -20,4 +20,4 @@
 2. Client : React Hooks / Typescript / Javascript / HTML / CSS 
 
 ### 실행 화면
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="300px" height="300px"/>
+<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400px" height="300px"/>
