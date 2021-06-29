@@ -20,4 +20,5 @@
 2. Client : React Hooks / Typescript / Javascript / HTML / CSS 
 
 ### 실행 화면
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400px" height="300px"/>
+<img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_login.PNG" width="400px" height="300px"/>
+<img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_main.PNG" width="400px" height="300px"/>
