@@ -20,7 +20,8 @@
 2. Client : React Hooks / Typescript / Javascript / HTML / CSS 
 
 ### 실행 화면
+1. 로그인 / 메인
 <div>
-    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_login.PNG" width="450px" height="320px"/>
-    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_main.PNG" width="450px" height="320px"/>
+    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_login.PNG" width="450" />
+    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_main.PNG" width="450" />
 </div>
