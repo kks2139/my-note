@@ -20,5 +20,7 @@
 2. Client : React Hooks / Typescript / Javascript / HTML / CSS 
 
 ### 실행 화면
-<img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_login.PNG" width="400px" height="300px"/>
-<img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_main.PNG" width="400px" height="300px"/>
+<div>
+    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_login.PNG" width="450px" height="320px"/>
+    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_main.PNG" width="450px" height="320px"/>
+</div>
