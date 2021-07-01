@@ -57,7 +57,7 @@ input {
 }
 
 .dark {
-  background-color: var(--theme-dark-2);
+  background-color: var(--theme-dark-1);
   color: white;
 }
 

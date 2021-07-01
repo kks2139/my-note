@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Toolbar } from './CompLink';
+import {FcViewDetails} from 'react-icons/fc';
+
 
 interface contentBoxProps {
     textContent: string;
@@ -21,7 +24,13 @@ function ContentBox({textContent, noteName, noteId, onContentChange}: contentBox
     return (
         <div className='content-box'>
             <div className='sessionbar-h'></div>
-            <div className='content-box-note-name'>{noteName}</div>
+            <div className='content-box-header'>
+                <div className='content-box-note-name'>
+                    <FcViewDetails style={{marginRight : '10px'}}></FcViewDetails>
+                    {noteName}
+                </div>
+                <Toolbar></Toolbar>
+            </div>
             <textarea value={textContent} data-id={noteId} onChange={onChange} onKeyDown={onKeyDown}></textarea>
         </div>
     );

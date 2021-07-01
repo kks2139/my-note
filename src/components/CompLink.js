@@ -9,6 +9,7 @@ import NoteList from './NoteList';
 import NoteLabel from './NoteLabel';
 import NaviFooter from './NaviFooter';
 import ContentBox from './ContentBox';
+import Toolbar from './Toolbar';
 
 export {
     Input, 
@@ -21,5 +22,6 @@ export {
     NoteList,
     NoteLabel,
     NaviFooter,
-    ContentBox
+    ContentBox,
+    Toolbar
 };

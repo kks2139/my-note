@@ -16,7 +16,7 @@ function HistoryPopup({showPopup, onCloseHistoryPopup}: historyPopupProp){
     ];
 
     useEffect(()=>{
-
+        // 이력 리스트 조회
     });
 
     return (

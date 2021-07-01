@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import {FcPrevious} from 'react-icons/fc';
 
 interface verticalNaviProps {
     children?: React.ReactNode
@@ -24,7 +25,9 @@ function VerticalNavi({children}: verticalNaviProps){
                 {children}
             </div>
             <div className='vertical-navi-sub' onClick={onClickHide}>
-                <div data-name='hide'>{'<'}</div>
+                <div data-name='hide'>
+                    <FcPrevious size='20'></FcPrevious>
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Button} from './CompLink';
 
-type rootEl = 'button' | 'combox';
+type rootEl = 'button' | 'combo';
 
 interface itemAttr {
     data: string;
@@ -37,7 +37,7 @@ function DropDownList({type, text='', items, onSelect}: dropDownListProps){
         <div className='dropdown-box' ref={dropDownRef}>
             {type === 'button' ?
                 <Button text={text} onClick={onClick}></Button> :
-                <input readOnly onClick={onClick} value={inputVal}></input>
+                <div className='combo' onClick={onClick}>{inputVal}</div>
             }
             <div className='drop-list hide-node' ref={dropListRef}>
                 {items.map((d, i)=>{

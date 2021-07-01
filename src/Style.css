@@ -9,10 +9,11 @@
 .push-h {margin: auto 0;}
   
 .app-name {
-    font-size: 50px;
-    font-weight: 500;
+    font-size: 60px;
+    font-weight: bold;
     text-align: center;
     margin-bottom: 80px;
+    text-shadow: 0 10px 5px black;
     /* animation: color-change 1s ease 0s infinite normal; */
 }
 
@@ -31,7 +32,7 @@
     text-align: center;
     width: 400px;
     height: 350px;
-    box-shadow: 0 0 20px -5px black;
+    box-shadow: 0 10px 20px 0px rgb(0, 0, 0);
 }
 .login-box .login-tit {
     font-size: 25px;
@@ -93,7 +94,14 @@
 
 .hide-node {display: none;}
 
-.dropdown-box {
+.dropdown-box .combo {
+    width: fit-content;
+    min-width: 30px;
+    height: 20px;
+    background-color: white;
+}
+.dropdown-box .combo:hover {
+    cursor: pointer;
 }
 .drop-list {
     position: absolute;
@@ -155,12 +163,11 @@
     justify-content: center;
     position: relative;
     transform: translate(200px, calc(-100% - 5px));
-    width: 25px;
+    width: 20px;
     height: 70px;
-    /* font-weight: bold; */
     font-size: 25px;
     text-align: center;
-    background-color: var(--theme-color-2);
+    background-color: white;
     box-shadow: 7px 3px 10px -7px black;
     border-top-right-radius: var(--radius);
     border-bottom-right-radius: var(--radius);
@@ -227,7 +234,7 @@
     height: 30px;
 }
 .noteLabel-selected {
-    box-shadow: 0 0 3px 1px var(--theme-color-2);
+    box-shadow: 0 0 3px 2px var(--theme-color-2);
 }
 .noteLabel-edit {
     /* animation: var(--ani-shaking); */
@@ -304,23 +311,27 @@
 .content-box-note-name {
     border-top-left-radius: var(--radius);
     border-top-right-radius: var(--radius);
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(71, 71, 71);
+    box-shadow: 0 3px 10px 0 black;
     width: fit-content;
     height: 35px;
     line-height: 35px;
-    padding: 0 20px;
+    padding: 0 15px;
     font-weight: bold;
     font-size: 20px;
+}
+.content-box-header {
+    display: flex;
 }
 .content-box textarea {
     width: calc(100vw - var(--vertical-navi-w) - 50px);
     height: calc(100% - 110px);
+    line-height: calc(100% + 8px);
     border-radius: var(--radius);
     box-shadow: 0 0 5px 0px black;
     background-color: rgb(70, 70, 70);
     color: white;
     padding: 10px;
-    font-weight: bold;
     font-size: 14px;
     transition: width .3s;
 }
@@ -378,4 +389,26 @@
     transform: translateY(-4px);
     text-shadow: 0 2px 2px black;
     transition: transform .2s, text-shadow .2s;
+}
+
+.toolbar-box {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    background-color: white;
+    padding: 5px 10px;
+    margin: 0 15px;
+    border-radius: var(--radius);
+}
+.toolbar-box > * {
+    cursor: pointer;
+}
+.toolbar-box > svg {
+    border: 1px solid black;
+    margin: auto 0;
+}
+.edit-tools {
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
 }
