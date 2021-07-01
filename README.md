@@ -15,9 +15,13 @@
     - 404 Not Found
 
 
-### 기술 스택
+### 개발 환경
 1. Server : ExpressJS / AWS RDS / MySQL
 2. Client : React Hooks / Typescript / Javascript / HTML / CSS 
 
 ### 실행 화면
-<img src="https://github.com/kks2139/Tetris/blob/main/readme_img/login.PNG?raw=true" width="400px" height="300px"/>
+1. 로그인 / 메인
+<div>
+    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_login.PNG" width="450" />
+    <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_main.PNG" width="450" />
+</div>
