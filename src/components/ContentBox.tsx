@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
 import { Toolbar } from './CompLink';
 import {FcViewDetails} from 'react-icons/fc';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 
 interface contentBoxProps {
     textContent: string;
     noteName: string;
     noteId: string;
-    onContentChange: (e: HTMLTextAreaElement)=>void;
+    onContentChange: (e: HTMLDivElement)=>void;
 }
 
 function ContentBox({textContent, noteName, noteId, onContentChange}: contentBoxProps){
-    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
-        onContentChange(e.currentTarget);
-    }
+    const contRef = useRef<HTMLDivElement | null>(null);
 
-    const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>)=>{
+    // const onChange = (e: React.ChangeEvent<HTMLDivElement>)=>{
+    //     onContentChange(e.currentTarget);
+    // }
+
+    const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>)=>{
         if(e.key === 'Tab'){
             e.preventDefault(); // 브라우저 다른 요소로 포커스 이동 차단
+        }else{
+            onContentChange(e.currentTarget);
         }
     }
+
+    useEffect(()=>{
+        contRef.current!.innerHTML = textContent;
+    }, [noteId]);
 
     return (
         <div className='content-box'>
@@ -31,7 +41,7 @@ function ContentBox({textContent, noteName, noteId, onContentChange}: contentBox
                 </div>
                 <Toolbar></Toolbar>
             </div>
-            <textarea value={textContent} data-id={noteId} onChange={onChange} onKeyDown={onKeyDown}></textarea>
+            <div ref={contRef} className='cont-box' contentEditable={true} suppressContentEditableWarning={true} data-id={noteId} onKeyDown={onKeyDown}></div>
         </div>
     );
 }

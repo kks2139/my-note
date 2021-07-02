@@ -80,6 +80,14 @@ input {
 }
 /**************************************/
 
+.cover-for-hide {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .not-found {
   position: absolute;
   top: 45%;
@@ -236,3 +244,8 @@ input {
 .loadmask > .mask-8 {animation: loading-mask 1.1s ease .8s infinite normal;}
 .loadmask > .mask-9 {animation: loading-mask 1.1s ease .9s infinite normal;}
 .loadmask > .mask-10 {animation: loading-mask 1.1s ease 1s infinite normal;}
+
+.color-picker {
+  z-index: 2;
+  position: absolute;
+}

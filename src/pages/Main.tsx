@@ -128,22 +128,22 @@ function Main({history}:RouteComponentProps){
         });
     }
 
-    const onContentChange = (targ: HTMLTextAreaElement)=>{
+    const onContentChange = (targ: HTMLDivElement)=>{
         setInfo({
             ...info,
             contentInfo : {
                 ...info.contentInfo,
-                nowContent : targ.value
+                nowContent : targ.innerHTML
             }
         });
 
-        if(cntRef.current > 0) {
+        if(cntRef.current > 1) {
             const param = {
                 url : 'saveTextContent',
                 body : {
                     note_id : targ.dataset.id,
                     user_id : localStorage.getItem('userId'),
-                    txt_cont : targ.value 
+                    txt_cont : targ.innerHTML 
                 },
                 showLoad : false
             };

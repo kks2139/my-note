@@ -323,9 +323,14 @@
 .content-box-header {
     display: flex;
 }
-.content-box textarea {
+.content-box-expand {
+    left : calc(15px - var(--vertical-navi-w));
+}
+.content-box .cont-box {
+    /* background-color: white !important; */
     width: calc(100vw - var(--vertical-navi-w) - 50px);
-    height: calc(100% - 110px);
+    height: calc(100vh - 125px);
+    overflow-y: auto;
     line-height: calc(100% + 8px);
     border-radius: var(--radius);
     box-shadow: 0 0 5px 0px black;
@@ -335,10 +340,7 @@
     font-size: 14px;
     transition: width .3s;
 }
-.content-box-expand {
-    left : calc(15px - var(--vertical-navi-w));
-}
-.content-box-expand > textarea {
+.content-box-expand > .cont-box {
     width : calc(100vw - 60px);
 }
 
@@ -400,11 +402,19 @@
     margin: 0 15px;
     border-radius: var(--radius);
 }
-.toolbar-box > * {
+.toolbar-box > select {
+    width: 50px;
+    border: 0px;
+    border-radius: var(--radius);
+    font-weight: bold;
+    box-shadow: 0 0 8px -3px black;
+    padding: 0 3px;
+}
+.toolbar-box > .edit-tools, .toolbar-box > .picker-box{
     cursor: pointer;
 }
 .toolbar-box > svg {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: auto 0;
 }
 .edit-tools {
