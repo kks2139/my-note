@@ -75,7 +75,7 @@ function ToolBar(){
                 <FiItalic size='18' color='black' onClick={onClickTool} data-name='italic'></FiItalic>
                 <BiBold size='20' color='black' onClick={onClickTool} data-name='bold'></BiBold>
                 <MdFormatUnderlined size='20' color='black' onClick={onClickTool} data-name='underline'></MdFormatUnderlined>
-                <MdBorderColor size='20' color='black' onClick={onClickTool} data-name='hiliteColor'></MdBorderColor>
+                <MdBorderColor size='18' color='black' onClick={onClickTool} data-name='hiliteColor'></MdBorderColor>
             </div>
         </div>
     );

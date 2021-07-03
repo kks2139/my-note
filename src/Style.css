@@ -407,15 +407,18 @@
     border: 0px;
     border-radius: var(--radius);
     font-weight: bold;
-    box-shadow: 0 0 8px -3px black;
+    box-shadow: 0 0 6px -2px black;
     padding: 0 3px;
 }
 .toolbar-box > .edit-tools, .toolbar-box > .picker-box{
     cursor: pointer;
 }
-.toolbar-box > svg {
-    /* border: 1px solid black; */
-    margin: auto 0;
+.toolbar-box svg {
+    transition: color .2s, transform .2s;
+}
+.toolbar-box svg:hover {
+    color: rgb(172, 172, 172) !important;
+    transform: scale(1.2);
 }
 .edit-tools {
     display: flex;

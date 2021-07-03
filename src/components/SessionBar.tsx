@@ -23,12 +23,9 @@ function SessionBar({onClickInfo}: sessionBarProps){
         });
     }
 
-    const onSelect = (sel: infoItems): void=>{
-        // 콤보 리스트 - 1.사용자정보 2.수정이력
-        UT.toastMsg(sel.label);
-
-        const type = sel.data === 'd1' ? 'history' : 'userInfo';
-        onClickInfo(type);
+    const onSelect = (): void=>{
+        // const type = sel.data === 'd1' ? 'history' : 'userInfo';
+        onClickInfo('history');
     }
     
     return (
@@ -42,7 +39,8 @@ function SessionBar({onClickInfo}: sessionBarProps){
                 {/* <div className='timer'>{timer}</div> */}
                 <Clock></Clock>
                 <Button text='로그아웃' onClick={onLogoutClick}></Button>
-                <DropDownList type='button' text='정보' items={items} onSelect={onSelect}></DropDownList>
+                <Button text='수정이력' onClick={onSelect}></Button>
+                {/* <DropDownList type='button' text='정보' items={items} onSelect={onSelect}></DropDownList> */}
             </div>
         </div>
     );
