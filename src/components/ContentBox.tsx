@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Toolbar } from './CompLink';
 import {FcViewDetails} from 'react-icons/fc';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import {Button} from './CompLink';
 
 
 interface contentBoxProps {
     textContent: string;
     noteName: string;
     noteId: string;
-    onContentChange: (e: HTMLDivElement)=>void;
+    onContentChange: (e: HTMLDivElement, s: string)=>void;
 }
 
 function ContentBox({textContent, noteName, noteId, onContentChange}: contentBoxProps){
     const contRef = useRef<HTMLDivElement | null>(null);
 
-    // const onChange = (e: React.ChangeEvent<HTMLDivElement>)=>{
-    //     onContentChange(e.currentTarget);
-    // }
+    const onSave = ()=>{
+        onContentChange(contRef.current!, 'save');
+    }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>)=>{
         if(e.key === 'Tab'){
             e.preventDefault(); // 브라우저 다른 요소로 포커스 이동 차단
         }else{
-            onContentChange(e.currentTarget);
+            onContentChange(e.currentTarget, '');
         }
     }
 
@@ -39,7 +40,10 @@ function ContentBox({textContent, noteName, noteId, onContentChange}: contentBox
                     <FcViewDetails style={{marginRight : '10px'}}></FcViewDetails>
                     {noteName}
                 </div>
-                <Toolbar></Toolbar>
+                <div className='content-box-tools'>
+                    <Toolbar></Toolbar>
+                    <Button style={{backgroundColor : 'var(--theme-color-3)'}} text='저장' onClick={onSave}></Button>
+                </div>
             </div>
             <div ref={contRef} className='cont-box' contentEditable={true} suppressContentEditableWarning={true} data-id={noteId} onKeyDown={onKeyDown}></div>
         </div>

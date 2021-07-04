@@ -425,3 +425,10 @@
     width: 100px;
     justify-content: space-around;
 }
+
+.content-box-tools {
+    display: flex;
+    justify-content: space-between;
+    /* width: calc(100% - 120px); */
+    /* min-width: calc(100% - 120px); */
+}

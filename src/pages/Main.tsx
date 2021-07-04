@@ -128,7 +128,7 @@ function Main({history}:RouteComponentProps){
         });
     }
 
-    const onContentChange = (targ: HTMLDivElement)=>{
+    const onContentChange = (targ: HTMLDivElement, str: string)=>{
         setInfo({
             ...info,
             contentInfo : {
@@ -137,7 +137,7 @@ function Main({history}:RouteComponentProps){
             }
         });
 
-        if(cntRef.current > 1) {
+        if(cntRef.current > 1 || str) {
             const param = {
                 url : 'saveTextContent',
                 body : {

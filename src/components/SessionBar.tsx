@@ -36,7 +36,6 @@ function SessionBar({onClickInfo}: sessionBarProps){
             </div>
             <Pusher></Pusher>
             <div className='session-title-3'>
-                {/* <div className='timer'>{timer}</div> */}
                 <Clock></Clock>
                 <Button text='로그아웃' onClick={onLogoutClick}></Button>
                 <Button text='수정이력' onClick={onSelect}></Button>
