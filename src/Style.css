@@ -46,17 +46,13 @@
     width: 100%;
     background-color: white;
     display: flex;
+    justify-content: space-between;
     padding: 5px;
     box-shadow: var(--theme-shadow);
-}
-.sessionbar-box > table {
-    width: 100%;
 }
 .sessionbar-h {height: var(--sessionbar-h);}
 .session-title-1 {
     display: flex;
-    min-width: 400px;
-    width: 40%;
 }
 .session-sub-1 {
     font-size: 20px;
@@ -74,14 +70,13 @@
 }
 .session-title-3 {
     display: flex;
-    margin-right: 20px;
+    align-items: center;
 }
 .session-title-3 > div {margin-left: 5px;}
 
 .clock-box {
     color: black;
     font-weight: bold;
-    line-height: 35px;
 }
 .clock-sub-1 {
     font-size: 22px;

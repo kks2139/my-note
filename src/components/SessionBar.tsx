@@ -34,7 +34,6 @@ function SessionBar({onClickInfo}: sessionBarProps){
                 <div className='session-sub-1'>My Note</div>
                 <div className='session-sub-2'>{`'${localStorage.getItem('userId')}' 님 안녕하세요!`}</div>
             </div>
-            <Pusher></Pusher>
             <div className='session-title-3'>
                 <Clock></Clock>
                 <Button text='로그아웃' onClick={onLogoutClick}></Button>
