@@ -54,3 +54,7 @@
 ####  메인
 
 <img src="https://github.com/kks2139/my-note/blob/main/readme_img/mynote_main.PNG" width="800" />
+
+#### 잘못된 URL
+
+<img src="https://github.com/kks2139/my-note/blob/main/readme_img/404nf.PNG" width="800" />
